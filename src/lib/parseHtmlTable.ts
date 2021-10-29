@@ -1,39 +1,46 @@
 import { JSDOM } from "jsdom";
-import KeyValueQueue from "./KeyValueQueue";
+import KeyValueStock from "./KeyValueStock";
 
-const parseHtmlTable = (htmlTable: string): string[][] => {
+const parseHtmlTable = (htmlTable: string, selectorDetail = ""): string[][] => {
   const table: string[][] = []
-  const queue = new KeyValueQueue()
+  const stock = new KeyValueStock()
 
   const {document} = new JSDOM(htmlTable).window
-  const trNodeList = document.querySelectorAll("table[summary='選択した施設・時間帯の空き状況を確認するための表。'] tbody tr")
+  // TODO: 複数 table に対応する
+  const tableElement = document.querySelector(`table ${selectorDetail}`)
+  if (tableElement === null) { throw new Error("<table> がありません") }
 
-  // 各行の中で forEach で回して、スタックから取って詰めていく
+  const trNodeList = tableElement.querySelectorAll("tr")
+
   trNodeList.forEach((trElement, rowIndex) => {
-    const row: string[] = []
-    const cellNodeList = trElement.querySelectorAll("th,td") // cell = <th> or <td>
-
-    const endOfRow = false
+    table[rowIndex] = []
     let columnIndex = 0
-    while (endOfRow) {
-      // キューにあれば使う
-      // なければ cellNodeList を使う
-        // rowspan, colspan があればスタックする
-      const poppedCell = queue.dequeue(`${rowIndex}:${columnIndex}`)
-      if (poppedCell) {
-        table[rowIndex][columnIndex] = poppedCell
-      } else {
-        const cellElement = cellNodeList[columnIndex]
-        table[rowIndex][columnIndex] = cellElement.textContent || ""
+    const cellNodeList = trElement.querySelectorAll<HTMLTableCellElement>("th,td") // cell = <th> or <td>
 
-        // TODO: rowspan, colspan があればスタックする
+    cellNodeList.forEach(cellElement => {
+      // ストックがあれば使う
+      const stockedCell = stock.pop(`${rowIndex}:${columnIndex}`)
+      if (stockedCell) {
+        table[rowIndex][columnIndex] = stockedCell
+        columnIndex += 1
       }
 
-      columnIndex += 1
-      // TODO: endOfRow の判定処理
-    }
+      // NOTE: rowspan, colspan の指定がない場合は、rowSpan, colSpan に 1 が入る
+      const {rowSpan, colSpan} = cellElement
+      // th, td の中のテキストを取り出す。img なら alt を取得する。
+      const cellText = cellElement.textContent?.trim() || cellElement.querySelector("img")?.alt.trim() || ""
 
-    table.push(row)
+      // rowSpan が 1 より大きいなら、その分ストックする
+      for (let i = 1; i < rowSpan; i += 1) {
+        stock.add(`${rowIndex + i}:${columnIndex}`, cellText)
+      }
+
+      // colSpan の数だけループする
+      for (let i = 0; i < colSpan; i += 1) {
+        table[rowIndex][columnIndex] = cellText
+        columnIndex += 1
+      }
+    })
   })
 
   return table

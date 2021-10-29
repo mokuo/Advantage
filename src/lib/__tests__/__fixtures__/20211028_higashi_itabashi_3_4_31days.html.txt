@@ -1,0 +1,574 @@
+
+<?xml version="1.0" encoding="shift_jis" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+
+
+
+<!-- HTTPヘッダ制御 -->
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<!-- キャッシュ対策(2行) -->
+<meta http-equiv="Expire" content="0" />
+<meta http-equiv="Pragma" content="no-cache" />
+<!-- ページの説明とキーワード -->
+<meta name="description" content="板橋区公共施設予約システム ITA-リザーブ" />
+<meta name="keywords" content="公共,施設予約" />
+<!-- タイトル -->
+<title>板橋区公共施設予約システム ITA-リザーブ（予約対象区分選択）</title>
+
+
+
+
+
+<!-- CSS、IMGのデフォルトパスの設定 -->
+
+<!-- 共通スタイルシート -->
+<link rel="stylesheet" type="text/css" href="/eshisetsu/css/std/common.css?var=20200709" />
+<link rel="SHORTCUT ICON" href='/eshisetsu/img/std/icon/favicon.ico' />
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W989BTH');</script>
+<!-- End Google Tag Manager -->
+<!-- 共通スクリプト -->
+<script type="text/javascript" src='/eshisetsu/js/CommonFunctions.js?var=20200709'></script>
+<script type="text/javascript" src='/eshisetsu/js/jquery.js?var=20200709'></script>
+<script type="text/javascript" src='/eshisetsu/js/jquery-ui-personalized.js?var=20200709'></script>
+<script type="text/javascript" src='/eshisetsu/js/meca.js?var=20200709'></script>
+<!--[if IE 6]>
+	<script type="text/javascript" src="/eshisetsu/js/DD_belatedPNG-min.js"></script>
+	<script type="text/javascript">
+		DD_belatedPNG.fix('.pngbg');
+	</script>
+<![endif]-->
+<!-- キーボードの制御 -->
+<script type="text/javascript" src="/eshisetsu/js/checkHistoryBack.js"></script>
+
+<!-- 共通変数の設定 -->
+
+
+
+<link rel="stylesheet" type="text/css" href='/eshisetsu/css/std/calendar.css?var=20200709' />
+<link rel="stylesheet" type="text/css" href='/eshisetsu/css/std/alerts.css?var=20200709' />
+<script type="text/javascript" src='/eshisetsu/js/jquery.alerts.js?var=20200709'></script>
+
+	<script type="text/javascript">
+	<!--
+
+	function setInitImages() {
+
+		/* 表示するカレンダーがある場合は初期値設定を行う */
+		
+
+			/* 初期値設定（週間・月間表示） */
+			
+			if (document.getElementById("radioshow").value == "week") {
+				chng_Calradioshow('week','/eshisetsu/img/std/');
+			}
+			
+			if (document.getElementById("radioshow").value == "month") {
+				chng_Calradioshow('month','/eshisetsu/img/std/');
+			}
+
+			
+			
+			if (document.getElementById("checkShowDayMON").value == "") {
+				chng_Calweekshow('MON','/eshisetsu/img/std/');
+			}
+			
+			if (document.getElementById("checkShowDayTUE").value == "") {
+				chng_Calweekshow('TUE','/eshisetsu/img/std/');
+			}
+			
+			if (document.getElementById("checkShowDayWED").value == "") {
+				chng_Calweekshow('WED','/eshisetsu/img/std/');
+			}
+			
+			if (document.getElementById("checkShowDayTHU").value == "") {
+				chng_Calweekshow('THU','/eshisetsu/img/std/');
+			}
+			
+			if (document.getElementById("checkShowDayFRI").value == "") {
+				chng_Calweekshow('FRI','/eshisetsu/img/std/');
+			}
+			
+			if (document.getElementById("checkShowDaySAT").value == "") {
+				chng_Calweekshow('SAT','/eshisetsu/img/std/');
+			}
+			
+			if (document.getElementById("checkShowDaySUN").value == "") {
+				chng_Calweekshow('SUN','/eshisetsu/img/std/');
+			}
+			
+			if (document.getElementById("checkShowDayHOL").value == "") {
+				chng_Calweekshow('HOL','/eshisetsu/img/std/');
+			}
+
+		
+
+		/* チェックボックス画像セット */
+		var obj_R;
+		var i = 0;
+
+		do {
+			/* r_record が存在する間繰り返す */
+			if(document.getElementById("r_record" + i)) {
+				obj_R = document.getElementById("r_record" + i);
+
+				/* 画像変換 */
+				if (obj_R.value != ""){
+					chng_CalImage(i,obj_R.value,'/eshisetsu/img/std/');
+				}
+			} else {
+				break;
+			}
+			i = i + 1;
+
+		} while (1);
+
+		return true;
+	}
+
+	/*
+	* ｻﾌﾞﾐｯﾄ前の確定確認処理
+	*/
+	function isSubmitDataSetConfirm(task) {
+     	
+     	
+			isSubmitDataSet(task);
+        
+	}
+
+	/*
+	* カレンダー画像変換処理
+	*/
+	function chng_CalImageX(task,obj_onval) {
+		chng_CalImage(task,obj_onval,'/eshisetsu/img/std/');
+	}
+
+	/*
+	* 曜日条件などの表示処理（初期処理）
+	*/
+	function setInitViews() {
+		/* 表示するカレンダーがある場合は初期値設定を行う */
+		
+			/* 曜日条件の表示処理 */
+			initCalYobiShow();
+		
+	}
+	//-->
+	</script>
+</head>
+
+<body onload="setInitViews();setInitImages();" onunload="ignoreTrue();">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W989BTH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div id="header">
+	
+	
+	
+
+
+
+
+<form name="menu.Menu.Form" method="post" action="/eshisetsu/menu/MenuLookup.cgi" onsubmit="return false;" id="formMenuMain">
+
+<input type="hidden" name="txtProcId" value="/menu/Menu" />
+<input type="hidden" name="txtFunctionCode" value="" id="txtFunctionCode" />
+
+<div id="sidecolumn">
+	<h1 class="logo"><img src='/eshisetsu/img/std/side/logo.png' alt="公共施設予約システム" title="公共施設予約システム" class="pngfix"/></h1>
+	<div class="loginMessage">ゲストログイン中です。</div>
+	<div id="gnavi">
+		<ul>
+			
+			
+			
+				
+					<li class="vis"><a href="#" onclick="isNextFuncCodeSet('Yoyaku')">空き照会・予約</a></li>
+				
+				
+				
+				
+
+				
+				
+				
+			
+			
+			
+				
+			
+			
+			
+				
+			
+
+			
+			
+				
+				
+				
+					<li><a href="#" onclick="isNextFuncCodeSet('TodayInfo')">お知らせ</a></li>
+				
+			
+			
+
+			<li class="return">
+				<a href="#" onclick="isNextFuncCodeSet('MainMenu')">処理選択に戻る</a>
+			</li>
+			<li class="logout">
+				<a href="#" onclick="isNextFuncCodeSet('Logout')">ログアウト</a>
+			</li>
+		</ul>
+	</div>
+
+	
+		
+		<div id="examplebox">
+			<p class="exttl bgpng"><strong>凡例</strong></p>
+			
+			
+				
+					
+				
+			
+			
+			
+
+		
+			
+			
+				
+				
+					
+				
+				
+				
+			
+
+		
+			
+			
+				
+					
+				
+			
+			
+			
+			<ul>
+				
+				
+					
+					
+						
+						
+							<li><img src='/eshisetsu/img/std/side/exa_maru_pl.png' width="175" height="38"
+									alt="空いています"
+									title="空いています" />
+							</li>
+
+						
+					
+					
+					
+				
+				
+				
+					<li><img src='/eshisetsu/img/std/side/exa_batu.png' width="175" height="38"
+							alt="予約済みです"
+							title="予約済みです" />
+					</li>
+				
+				
+				
+				<li><img src='/eshisetsu/img/std/side/exa_kyuu.png' width="174" height="38"
+						alt="休館日です"
+						title="休館日です" />
+				</li>
+				<li><img src='/eshisetsu/img/std/side/exa_haifun.png' width="175" height="38"
+						alt="施設を利用できません"
+						title="施設を利用できません" />
+				</li>
+			</ul>
+		</div>
+	
+	</div>
+</form>
+
+	<form name="yoyaku.CalendarStatusSelect.Form" method="post" action="/eshisetsu/yoyaku/CalendarStatusSelect.cgi" onsubmit="return false;" id="formMain">
+	
+	<input type="hidden" name="action" value="" id="action" />
+	<input type="hidden" name="txtProcId" value="/yoyaku/CalendarStatusSelect" id="txtProcId" />
+	<input type="hidden" name="txtCalYobiView" value="" id="txtCalYobiView" />
+	
+
+	<div id="errcolumn">
+		<noscript><p class="jserr">JavaScriptが無効になっているため使用できません。<br />ブラウザ設定でJavaScriptを有効にしてください。</p></noscript>
+		<p class="jserr">●メッセージ
+<br />インターネット上で予約申込を希望する場合は、窓口で利用者登録を行ってください。
+</p>
+
+	</div>
+
+	<div id="hmaincolumn" class="pngbg">
+		<div id="reservation_flow" class="pngbg">
+			<ul>
+				<li>照会方法選択</li>
+				<li>施設選択</li>
+				
+				<li class="flowon"><p><strong><span>空き照会</span></strong></p></li>
+				
+				
+			</ul>
+		</div>
+		<h2>予約対象区分選択
+			<span class="pager">
+				<a href="javascript:void(0)" onclick="javascript:isSubmitDataSet('Back');return false;"><img src='/eshisetsu/img/std/common/btn_return.png' width="122" height="37"
+						alt="前に戻るボタン"
+						title="前に戻るボタン"
+						class="pngfix btn" /></a>
+				
+			</span>
+		</h2>
+
+		
+		<p>
+		カレンダーの表示開始日を変更する場合は、表示開始年月日を選択してください。<br />
+		各表示条件を選択した後、［表示ボタン］を押してください。
+		</p>
+
+		<div id="selectbox">
+			<ul>
+				<li>表示開始日<br />
+					<!-- 年リストボックス -->
+					<select name="optYear" style="font-size:130%;" id="optYear"><option value="2021" selected="selected">2021</option>
+<option value="2022">2022</option></select>年
+					<!-- 月リストボックス -->
+					<select name="optMonth" style="font-size:130%;" id="optMonth"><option value="01">01</option>
+<option value="02">02</option>
+<option value="03">03</option>
+<option value="04">04</option>
+<option value="05">05</option>
+<option value="06">06</option>
+<option value="07">07</option>
+<option value="08">08</option>
+<option value="09">09</option>
+<option value="10" selected="selected">10</option>
+<option value="11">11</option>
+<option value="12">12</option></select>月
+					<!-- 日リストボックス -->
+					<select name="optDay" style="font-size:130%;" id="optDay"><option value="01">01</option>
+<option value="02">02</option>
+<option value="03">03</option>
+<option value="04">04</option>
+<option value="05">05</option>
+<option value="06">06</option>
+<option value="07">07</option>
+<option value="08">08</option>
+<option value="09">09</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28" selected="selected">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option></select>
+					日から
+
+					
+						<input type="hidden" name="radioshow" value="week" id="radioshow" />
+					
+					
+					<a href="#" onclick="chng_Calradioshow('week','/eshisetsu/img/std/');return false;">
+						<img src='/eshisetsu/img/std/common/radioshowweek_o.png' width="105" height="37"
+							alt="7日表示&nbsp;選択済み"
+							title="7日表示&nbsp;選択済み"
+							id="radioshowweek" />
+					</a>
+					<a href="#" onclick="chng_Calradioshow('month','/eshisetsu/img/std/');return false;">
+						<img src='/eshisetsu/img/std/common/radioshowmonth.png' width="105" height="37"
+							alt="31日表示&nbsp;未選択"
+							title="31日表示&nbsp;未選択"
+							id="radioshowmonth" />
+					</a>
+					&nbsp;
+					<a href="javascript:void(0)" onclick="javascript:isSubmitDataSetConfirm('Setup');return false;"><img src='/eshisetsu/img/std/common/btn_display.png'
+						alt="表示ボタン"
+						title="表示ボタン"
+						class="pngfix btn" /></a>
+				</li>
+				<li>
+					<div id="calYobiHide">
+						<a href="#" id="calYobi1" onclick="calYobiShow();return false;">
+							<span>【曜日で表示を絞り込みたい場合は、こちらを押して表示条件を変更してください。】</span><br />
+						</a>
+					</div>
+					<div id="calYobiShow">
+						<a href="#" id="calYobi2" onclick="calYobiShow();return false;">
+							<span>【曜日の表示条件を閉じる場合は、こちらを押してください。】</span><br />
+						</a>
+						表示曜日<br />
+						
+						
+							<input type="hidden" name="checkShowDay" value="MON" id="checkShowDayMON" />
+						
+						<a href="#" onclick="chng_Calweekshow('MON','/eshisetsu/img/std/');return false;">
+								<img src='/eshisetsu/img/std/common/weekmon_o.png' width="82" height="32"
+									alt="月曜&nbsp;選択済み"
+									title="月曜&nbsp;選択済み"
+									id="buttonshowMON" />
+						</a>
+
+						
+						
+							<input type="hidden" name="checkShowDay" value="TUE" id="checkShowDayTUE" />
+						
+						<a href="#" onclick="chng_Calweekshow('TUE','/eshisetsu/img/std/');return false;">
+							<img src='/eshisetsu/img/std/common/weektue_o.png' width="82" height="32"
+								alt="火曜&nbsp;選択済み"
+								title="火曜&nbsp;選択済み"
+								id="buttonshowTUE" />
+						</a>
+
+						
+						
+							<input type="hidden" name="checkShowDay" value="WED" id="checkShowDayWED" />
+						
+						<a href="#" onclick="chng_Calweekshow('WED','/eshisetsu/img/std/');return false;">
+							<img src='/eshisetsu/img/std/common/weekwed_o.png' width="82" height="32"
+								alt="水曜&nbsp;選択済み"
+								title="水曜&nbsp;選択済み"
+								id="buttonshowWED" />
+						</a>
+
+						
+						
+							<input type="hidden" name="checkShowDay" value="THU" id="checkShowDayTHU" />
+						
+						<a href="#" onclick="chng_Calweekshow('THU','/eshisetsu/img/std/');return false;">
+							<img src='/eshisetsu/img/std/common/weekthu_o.png' width="82" height="32"
+								alt="木曜&nbsp;選択済み"
+								title="木曜&nbsp;選択済み"
+								id="buttonshowTHU" />
+						</a>
+
+						
+						
+							<input type="hidden" name="checkShowDay" value="FRI" id="checkShowDayFRI" />
+						
+						<a href="#" onclick="chng_Calweekshow('FRI','/eshisetsu/img/std/');return false;">
+							<img src='/eshisetsu/img/std/common/weekfri_o.png' width="82" height="32"
+								alt="金曜&nbsp;選択済み"
+								title="金曜&nbsp;選択済み"
+								id="buttonshowFRI" />
+						</a>
+						<br />
+						
+						
+							<input type="hidden" name="checkShowDay" value="SAT" id="checkShowDaySAT" />
+						
+						<a href="#" onclick="chng_Calweekshow('SAT','/eshisetsu/img/std/');return false;">
+							<img src='/eshisetsu/img/std/common/weeksat_o.png' width="82" height="32"
+								alt="土曜&nbsp;選択済み"
+								title="土曜&nbsp;選択済み"
+								id="buttonshowSAT" />
+						</a>
+
+						
+						
+							<input type="hidden" name="checkShowDay" value="SUN" id="checkShowDaySUN" />
+						
+						<a href="#" onclick="chng_Calweekshow('SUN','/eshisetsu/img/std/');return false;">
+							<img src='/eshisetsu/img/std/common/weeksun_o.png' width="82" height="32"
+								alt="日曜&nbsp;選択済み"
+								title="日曜&nbsp;選択済み"
+								id="buttonshowSUN" />
+						</a>
+
+						
+						
+							<input type="hidden" name="checkShowDay" value="HOL" id="checkShowDayHOL" />
+						
+						<a href="#" onclick="chng_Calweekshow('HOL','/eshisetsu/img/std/');return false;">
+							<img src='/eshisetsu/img/std/common/weekhol_o.png' width="82" height="32"
+								alt="土日祝&nbsp;選択済み"
+								title="土日祝&nbsp;選択済み"
+								id="buttonshowHOL" />
+						</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	
+	</div>
+
+	<div id="mmaincolumn">
+		
+
+		
+			
+				<div class="login_info_box">
+					<ol>
+						<li style="float:left; margin-top:8px;"><img src='/eshisetsu/img/std/common/information.png' class="pngfix" alt="" /></li>
+						<li style="float:left; margin-left:10px; margin-top:2px;">利用者登録済みの方で、引き続き予約申込を行う場合は<br />[ログインボタン]を押してログインしてください。</li>
+						<li style="float:right; margin-top:8px;">
+							<a href="javascript:void(0)" onclick="javascript:isSubmitDataSet('Login');return false;"><img src='/eshisetsu/img/std/common/btn_continue_login.png'
+									alt="ログインボタン"
+									title="ログインボタン"
+									class="pngfix btn" /></a>
+						</li>
+					</ol>
+				</div>
+			
+			
+			 <table border="0" cellspacing="1" cellpadding="0" id="facilitiesbox">  <tr><td> <h3><br /></h3><table border="0" cellspacing="1" cellpadding="0" summary="選択した施設・時間帯の空き状況を確認するための表。"><tr><th scope="col" colspan=9 style="text-align:left;background-color:#FFFFEA;">● <span style="margin-top:5px; font-size:11pt;">令和４年３月３１日まで土日祝の第３面はソフトテニス優先面となります。</span><br></th></tr><tr><th scope="col" colspan="2"><p class="wmmove"><a href="javascript:void(0)" onclick="javascript:isSubmitDataSet('OffsetPrev');return false;"><img src="../img/std/common/btn_lastweek.png" width="86" height="54" alt="前の7日分ボタン" title="前の7日分ボタン" class="pngfix btn" /></a> <a href="javascript:void(0)" onclick="javascript:isSubmitDataSet('OffsetNext');return false;"><img src="../img/std/common/btn_nextweek.png" width="86" height="54" alt="次の7日分ボタン" title="次の7日分ボタン" class="pngfix btn" /></a></p></th><th scope="col"><p class="day">10月<br />28日<br /><img src="../img/std/common/c_thu.gif" width="33" height="17" alt="木曜日" /></p></th><th scope="col"><p class="day">10月<br />29日<br /><img src="../img/std/common/c_fri.gif" width="33" height="17" alt="金曜日" /></p></th><th scope="col"><p class="day">10月<br />30日<br /><img src="../img/std/common/c_sat.gif" width="33" height="17" alt="土曜日" /></p></th><th scope="col"><p class="day">10月<br />31日<br /><img src="../img/std/common/c_sun.gif" width="33" height="17" alt="日曜日" /></p></th><th scope="col"><p class="day">11月<br />1日<br /><img src="../img/std/common/c_mon.gif" width="33" height="17" alt="月曜日" /></p></th><th scope="col"><p class="day">11月<br />2日<br /><img src="../img/std/common/c_tue.gif" width="33" height="17" alt="火曜日" /></p></th><th scope="col"><p class="day">11月<br />3日<br /><img src="../img/std/common/c_hol.gif" width="33" height="17" alt="祝日" /></p></th></tr><tr><td rowspan="6"  class="facmds"><strong>東板橋庭球場　３面</strong></td></tr><tr><td class="facmdstime">09:00 ～<br />11:00</td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="sat"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="sun"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="hol"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td></tr><tr><td class="facmdstime">11:00 ～<br />13:00</td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="sat"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="sun"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="hol"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td></tr><tr><td class="facmdstime">13:00 ～<br />15:00</td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="sat"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="sun"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="hol"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td></tr><tr><td class="facmdstime">15:00 ～<br />16:00</td><td class="weekday"><img src="../img/std/common/haifun.png" alt="施設を利用できません" title="施設を利用できません" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/haifun.png" alt="施設を利用できません" title="施設を利用できません" class="pngfix" /></td><td class="sat"><img src="../img/std/common/haifun.png" alt="施設を利用できません" title="施設を利用できません" class="pngfix" /></td><td class="sun"><img src="../img/std/common/haifun.png" alt="施設を利用できません" title="施設を利用できません" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/maru.png" width="38" height="42" alt="空いています" title="空いています" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="hol"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td></tr><tr><td class="facmdstime">15:00 ～<br />17:00</td><td class="weekday"><img src="../img/std/common/maru.png" width="38" height="42" alt="空いています" title="空いています" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="sat"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="sun"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/haifun.png" alt="施設を利用できません" title="施設を利用できません" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/haifun.png" alt="施設を利用できません" title="施設を利用できません" class="pngfix" /></td><td class="hol"><img src="../img/std/common/haifun.png" alt="施設を利用できません" title="施設を利用できません" class="pngfix" /></td></tr><tr><td colspan="9" class="pagemove"><a href="#header"><img src="../img/std/common/btn_pagetop.png" width="132" height="32" alt="ページの先頭へボタン" title="ページの先頭へボタン" class="pngfix btn" /></a>　<a href="#footer"><img src="../img/std/common/btn_pageunder.png" width="132" height="32" alt="ページの最終へボタン" title="ページの最終へボタン" class="pngfix btn" /></a></td></tr><tr><td class="pagemove"><br /></td></tr><tr><th scope="col" colspan=9 style="text-align:left;background-color:#FFFFEA;">● <span style="margin-top:5px; font-size:11pt;">令和４年３月３１日まで土日祝の第３面はソフトテニス優先面となります。</span><br></th></tr><tr><th scope="col" colspan="2"><p class="wmmove"><a href="javascript:void(0)" onclick="javascript:isSubmitDataSet('OffsetPrev');return false;"><img src="../img/std/common/btn_lastweek.png" width="86" height="54" alt="前の7日分ボタン" title="前の7日分ボタン" class="pngfix btn" /></a> <a href="javascript:void(0)" onclick="javascript:isSubmitDataSet('OffsetNext');return false;"><img src="../img/std/common/btn_nextweek.png" width="86" height="54" alt="次の7日分ボタン" title="次の7日分ボタン" class="pngfix btn" /></a></p></th><th scope="col"><p class="day">10月<br />28日<br /><img src="../img/std/common/c_thu.gif" width="33" height="17" alt="木曜日" /></p></th><th scope="col"><p class="day">10月<br />29日<br /><img src="../img/std/common/c_fri.gif" width="33" height="17" alt="金曜日" /></p></th><th scope="col"><p class="day">10月<br />30日<br /><img src="../img/std/common/c_sat.gif" width="33" height="17" alt="土曜日" /></p></th><th scope="col"><p class="day">10月<br />31日<br /><img src="../img/std/common/c_sun.gif" width="33" height="17" alt="日曜日" /></p></th><th scope="col"><p class="day">11月<br />1日<br /><img src="../img/std/common/c_mon.gif" width="33" height="17" alt="月曜日" /></p></th><th scope="col"><p class="day">11月<br />2日<br /><img src="../img/std/common/c_tue.gif" width="33" height="17" alt="火曜日" /></p></th><th scope="col"><p class="day">11月<br />3日<br /><img src="../img/std/common/c_hol.gif" width="33" height="17" alt="祝日" /></p></th></tr><tr><td class="facmds" rowspan="6"><strong>東板橋庭球場　４面</strong></td></tr><tr><td class="facmdstime">09:00 ～<br />11:00</td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="sat"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="sun"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/maru.png" width="38" height="42" alt="空いています" title="空いています" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="hol"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td></tr><tr><td class="facmdstime">11:00 ～<br />13:00</td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="sat"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="sun"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/maru.png" width="38" height="42" alt="空いています" title="空いています" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="hol"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td></tr><tr><td class="facmdstime">13:00 ～<br />15:00</td><td class="weekday"><img src="../img/std/common/maru.png" width="38" height="42" alt="空いています" title="空いています" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="sat"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="sun"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="hol"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td></tr><tr><td class="facmdstime">15:00 ～<br />16:00</td><td class="weekday"><img src="../img/std/common/haifun.png" alt="施設を利用できません" title="施設を利用できません" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/haifun.png" alt="施設を利用できません" title="施設を利用できません" class="pngfix" /></td><td class="sat"><img src="../img/std/common/haifun.png" alt="施設を利用できません" title="施設を利用できません" class="pngfix" /></td><td class="sun"><img src="../img/std/common/haifun.png" alt="施設を利用できません" title="施設を利用できません" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="hol"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td></tr><tr><td class="facmdstime">15:00 ～<br />17:00</td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="sat"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="sun"><img src="../img/std/common/batu.png" width="38" height="42" alt="予約済みです" title="予約済みです" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/haifun.png" alt="施設を利用できません" title="施設を利用できません" class="pngfix" /></td><td class="weekday"><img src="../img/std/common/haifun.png" alt="施設を利用できません" title="施設を利用できません" class="pngfix" /></td><td class="hol"><img src="../img/std/common/haifun.png" alt="施設を利用できません" title="施設を利用できません" class="pngfix" /></td></tr><tr><td colspan="9" class="pagemove"><a href="#header"><img src="../img/std/common/btn_pagetop.png" width="132" height="32" alt="ページの先頭へボタン" title="ページの先頭へボタン" class="pngfix btn" /></a>　<a href="#footer"><img src="../img/std/common/btn_pageunder.png" width="132" height="32" alt="ページの最終へボタン" title="ページの最終へボタン" class="pngfix btn" /></a></td></tr></table></td></tr></table>
+		
+	</div>
+	</form>
+
+	<div id="fmaincolumn">
+		<div id="pagerbox">
+		  <span>
+			<a href="javascript:void(0)" onclick="javascript:isSubmitDataSet('Back');return false;"><img src='/eshisetsu/img/std/common/btn_return.png' width="122" height="37"
+					alt="前に戻るボタン"
+					title="前に戻るボタン"
+					class="pngfix btn" /></a>
+			
+		  </span>
+		</div>
+		<div id="footer" class="pngbg"><address class="pngbg">&nbsp;</address></div>
+	</div>
+
+
+</div>
+
+</body>
+</html>
