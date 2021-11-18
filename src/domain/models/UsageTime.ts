@@ -1,13 +1,13 @@
 import dayjs, { Dayjs } from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import IValueObject from "./IValueObject";
 
 dayjs.extend(isSameOrAfter)
 
-/* eslint max-classes-per-file: 0 */
 export class DifferentDatesError extends Error {}
 export class StartTimeIsAfterEndTimeError extends Error {}
 
-class UsageTime {
+class UsageTime implements IValueObject {
   private startTime: Dayjs
 
   private endTime: Dayjs
@@ -23,6 +23,11 @@ class UsageTime {
     if (this.startTime.isSameOrAfter(this.endTime, "minute")) {
       throw new StartTimeIsAfterEndTimeError()
     }
+  }
+
+  isEqual(other: UsageTime) {
+    return this.startTime.isSame(other.startTime) &&
+      this.endTime.isSame(other.endTime)
   }
 }
 

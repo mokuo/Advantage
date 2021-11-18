@@ -39,6 +39,7 @@ module.exports = {
     "node/no-missing-import": ["off"], // fix: `"@src/***" is not found. eslint(node/no-missing-import)`
     "import/order": [2, { "alphabetize": { "order": "asc" }}],
     "quotes": [2, "double"],
-    "class-methods-use-this": ["off"] // NOTE: this がなくても class を使いたい時がある
+    "class-methods-use-this": ["off"], // NOTE: this がなくても class を使いたい時がある
+    "max-classes-per-file": ["off"]
   },
 };

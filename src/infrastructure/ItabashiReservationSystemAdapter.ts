@@ -2,6 +2,7 @@ import { Browser } from "playwright";
 import BaseReservationSystemAdapter from "./BaseReservationSystemAdapter";
 import IReservationSystemAdapter from "./IReservationSystemAdapter";
 import TennisCourt from "@src/domain/models/TennisCourt";
+import parseHtmlTable from "@src/lib/parseHtmlTable";
 
 const URL = "https://www.itabashi-shisetsu-yoyaku.jp/eshisetsu/menu/Login.cgi"
 
@@ -22,11 +23,8 @@ class ItabashiReservationSystemAdapter extends BaseReservationSystemAdapter impl
     await this.waitAndClick(page, "img[alt='31日表示 未選択']") // ３１日表示
     await this.waitAndClick(page, "img[alt='表示ボタン']") // 表示
 
-    const tableHTML = await page.innerHTML("table[summary='選択した施設・時間帯の空き状況を確認するための表。']")
-    console.log("aaa!!!")
-    console.log(tableHTML)
-
-    await page.screenshot({ path: "/Users/kida/ghq/github.com.private/mokuo/Advantage/tmp/test009.png" })
+    const html = await page.content()
+    const table = parseHtmlTable(html)
 
     return [] // HACK
   }

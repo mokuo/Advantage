@@ -4,7 +4,6 @@ import ItabashiReservationSystemAdapter from "./reservation-system-adapters/Itab
 import TennisCourt from "@src/domain/models/TennisCourt";
 import IReservationSystemsAdapter from "@src/usecase/IReservationSystemsAdapter";
 
-/* eslint max-classes-per-file: 0 */
 export class ReservationSystemScrapingError extends Error {}
 
 class ReservationSystemsAdapter implements IReservationSystemsAdapter {

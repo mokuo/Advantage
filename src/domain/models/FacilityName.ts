@@ -1,12 +1,20 @@
-class FacilityName {
-  private value: string
+import IValueObject from "./IValueObject";
 
-  constructor(value: string) {
+type FacilityNameValue = "itabashi"
+
+class FacilityName implements IValueObject {
+  private value: FacilityNameValue
+
+  constructor(value: FacilityNameValue) {
     this.value = value
   }
 
-  public toString(): string {
+  public toString(): FacilityNameValue {
     return this.value
+  }
+
+  isEqual(other: FacilityName) {
+    return this.value === other.value
   }
 }
 

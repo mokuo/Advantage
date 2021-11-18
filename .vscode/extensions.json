@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "jebbs.plantuml",
-    "yzhang.markdown-all-in-one"
+    "yzhang.markdown-all-in-one",
+    "dbaeumer.vscode-eslint"
   ]
 }
