@@ -52,24 +52,34 @@ class ItabashiTennisCourtTable {
     if (!dateGroups) { throw new UnexpectedValueError(`不正な日付です: ${rawDate}`) }
     if (!timeGroups) { throw new UnexpectedValueError(`不正な時刻です: ${rawTime}`) }
 
-    // TODO: 今月よりも小さい次の場合、来年と判断する
-    const year = new Date().getFullYear()
+    const month = Number(dateGroups.month)
+    const year = this.getYearByMonth(month)
+
     const startTime = new Date(
       year,
-      Number(dateGroups.month) - 1,
+      month - 1,
       Number(dateGroups.day),
       Number(timeGroups.startHour),
       Number(timeGroups.startMinute)
     )
     const endTime = new Date(
       year,
-      Number(dateGroups.month) - 1,
+      month - 1,
       Number(dateGroups.day),
       Number(timeGroups.endHour),
       Number(timeGroups.endMinute)
     )
 
     return new UsageTime(startTime, endTime)
+  }
+
+  private getYearByMonth(month: number) {
+    const today = new Date()
+    const thisYear = today.getFullYear()
+    const thisMonth = today.getMonth() + 1
+
+    // NOTE: month が今月より前の場合は来年、それ以外は今年と判断する。今月来月くらいしか表示しない前提。
+    return month < thisMonth ? thisYear + 1 : thisYear
   }
 }
 
