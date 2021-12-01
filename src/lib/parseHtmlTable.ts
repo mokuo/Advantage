@@ -1,13 +1,13 @@
 import { JSDOM } from "jsdom";
 import KeyValueStock from "./KeyValueStock";
 
-const parseHtmlTable = (htmlTable: string, selectorDetail = ""): string[][] => {
+const parseHtmlTable = (htmlTable: string, tableSelector = "table"): string[][] => {
   const table: string[][] = []
   const stock = new KeyValueStock()
 
   const {document} = new JSDOM(htmlTable).window
   // TODO: 複数 table に対応する
-  const tableElement = document.querySelector(`table ${selectorDetail}`)
+  const tableElement = document.querySelector(tableSelector)
   if (tableElement === null) { throw new Error("<table> がありません") }
 
   const trNodeList = tableElement.querySelectorAll("tr")

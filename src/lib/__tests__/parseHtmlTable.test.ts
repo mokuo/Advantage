@@ -25,10 +25,10 @@ describe("parseHtmlTable()", () => {
     ["ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン"]
   ]
 
-  it("hoge", async () => {
+  it("HTML の <table> を二次元配列に変換する", async () => {
     const htmlFilePath = join(__dirname, "__fixtures__","20211028_higashi_itabashi_3_4_31days.html.txt")
     const html = await readFile(htmlFilePath)
-    const array = parseHtmlTable(html.toString(), "[summary='選択した施設・時間帯の空き状況を確認するための表。']")
+    const array = parseHtmlTable(html.toString(), "table [summary='選択した施設・時間帯の空き状況を確認するための表。']")
 
     expect(array).toEqual(expectedArray)
   })

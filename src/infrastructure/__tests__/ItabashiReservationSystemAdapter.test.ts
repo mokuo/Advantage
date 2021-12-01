@@ -2,14 +2,14 @@ import { chromium } from "playwright";
 import ItabashiReservationSystemAdapter from "../ItabashiReservationSystemAdapter";
 
 // fix: `thrown: "Exceeded timeout of 5000 ms for a test.`
-jest.setTimeout(300000)
+jest.setTimeout(30000)
 
 describe("ItabashiReservationSystemAdapter", () => {
   it("hoge", async () => {
     const browser = await chromium.launch()
     const adapter = new ItabashiReservationSystemAdapter()
-    await adapter.getTennisCourts(browser)
+    const tennisCourts = await adapter.getTennisCourts(browser)
 
-    expect("hoge").toEqual("hoge")
+    expect(tennisCourts.length > 0).toBeTruthy()
   })
 })

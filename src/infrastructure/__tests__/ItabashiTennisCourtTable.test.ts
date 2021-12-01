@@ -19,7 +19,6 @@ describe("ItabashiTennisCourtName", () => {
         ["東板橋庭球場　３面", "11:00 ～13:00", "予約済みです", "予約済みです", "予約済みです", "予約済みです", "予約済みです", "予約済みです", "予約済みです"],
         ["東板橋庭球場　３面", "13:00 ～15:00", "予約済みです", "予約済みです", "予約済みです", "予約済みです", "予約済みです", "予約済みです", "予約済みです"],
         ["東板橋庭球場　３面", "15:00 ～16:00", "施設を利用できません", "施設を利用できません", "施設を利用できません", "施設を利用できません", "空いています", "予約済みです", "予約済みです"],
-        ["東板橋庭球場　３面", "15:00 ～17:00", "空いています", "予約済みです", "予約済みです", "予約済みです", "施設を利用できません", "施設を利用できません", "施設を利用できません"],
         ["ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン"],
       ]
       const expectedFirstTennisCourt = new TennisCourt(
@@ -31,14 +30,14 @@ describe("ItabashiTennisCourtName", () => {
       const expectedLastTennisCourt = new TennisCourt(
         new FacilityName("itabashi"),
         new TennisCourtName("東板橋庭球場　３面"),
-        new UsageTime(new Date(2021, 11 - 1, 3, 15, 0), new Date(2021, 11 - 1, 3, 17, 0)),
+        new UsageTime(new Date(2021, 11 - 1, 3, 15, 0), new Date(2021, 11 - 1, 3, 16, 0)),
         new TennisCourtStatus("unavailable")
       )
 
       const itabashiTennisCourtTable = new ItabashiTennisCourtTable(table)
       const tennisCourts = itabashiTennisCourtTable.extractTennisCourts()
 
-      expect(tennisCourts.length).toEqual(35)
+      expect(tennisCourts.length).toEqual(28)
       expect(tennisCourts[0].isSameTennisCourt(expectedFirstTennisCourt)).toBeTruthy()
       expect(tennisCourts[tennisCourts.length - 1].isSameTennisCourt(expectedLastTennisCourt)).toBeTruthy()
     })
