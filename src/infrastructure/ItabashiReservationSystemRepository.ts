@@ -1,7 +1,6 @@
-import { Browser } from "playwright";
-import BaseReservationSystemAdapter from "./BaseReservationSystemAdapter";
-import IReservationSystemAdapter from "./IReservationSystemAdapter";
+import BaseReservationSystemRepository from "./BaseReservationSystemRepository";
 import ItabashiTennisCourtTable from "./ItabashiTennisCourtTable";
+import IReservationSystemRepository from "@src/domain/models/IReservationSystemRepository";
 import TennisCourt from "@src/domain/models/TennisCourt";
 import parseHtmlTable from "@src/lib/parseHtmlTable";
 import sleep from "@src/lib/sleep";
@@ -10,9 +9,10 @@ const URL = "https://www.itabashi-shisetsu-yoyaku.jp/eshisetsu/menu/Login.cgi"
 const TABLE_SELECTOR = "table [summary='選択した施設・時間帯の空き状況を確認するための表。']"
 const TENNIS_COURT_ROW_SIZE = 8
 
-class ItabashiReservationSystemAdapter extends BaseReservationSystemAdapter implements IReservationSystemAdapter  {
-  async getTennisCourts(browser: Browser): Promise<TennisCourt[]> {
-    const context = await browser.newContext()
+class ItabashiReservationSystemRepository extends BaseReservationSystemRepository implements IReservationSystemRepository {
+
+  async getTennisCourts(): Promise<TennisCourt[]> {
+    const context = await this.browser.newContext()
     const page = await context.newPage()
 
     await page.goto(URL)
@@ -46,4 +46,4 @@ class ItabashiReservationSystemAdapter extends BaseReservationSystemAdapter impl
   }
 }
 
-export default ItabashiReservationSystemAdapter
+export default ItabashiReservationSystemRepository

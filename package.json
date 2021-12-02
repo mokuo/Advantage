@@ -11,7 +11,8 @@
   },
   "scripts": {
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "db:start": "gcloud beta emulators firestore start"
   },
   "repository": {
     "type": "git",
@@ -42,6 +43,7 @@
     "typescript": "^4.4.3"
   },
   "dependencies": {
+    "@google-cloud/firestore": "^4.15.1",
     "app-root-path": "^3.0.0",
     "dayjs": "^1.10.7",
     "jsdom": "^17.0.0",
