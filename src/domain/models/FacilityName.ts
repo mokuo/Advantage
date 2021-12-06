@@ -9,7 +9,7 @@ class FacilityName implements IValueObject {
     this.value = value
   }
 
-  public toString(): FacilityNameValue {
+  toString(): FacilityNameValue {
     return this.value
   }
 

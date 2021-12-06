@@ -1,5 +1,6 @@
 import FacilityName from "@src/domain/models/FacilityName";
 import TennisCourt from "@src/domain/models/TennisCourt";
+import TennisCourtId from "@src/domain/models/TennisCourtId";
 import TennisCourtName from "@src/domain/models/TennisCourtName";
 import TennisCourtStatus from "@src/domain/models/TennisCourtStatus";
 import UsageTime from "@src/domain/models/UsageTime";
@@ -30,6 +31,7 @@ class ItabashiTennisCourtTable {
         const usageTime = this.buildUsageTime(days[j], time)
         
         const tennisCourt = new TennisCourt(
+          TennisCourtId.build(),
           new FacilityName("itabashi"),
           tennisCourtName,
           usageTime,

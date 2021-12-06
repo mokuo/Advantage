@@ -1,14 +1,25 @@
+import { v4 as uuidv4, validate as uuidValidate } from "uuid";
 import IValueObject from "./IValueObject";
+
+class NotUuidError extends Error {}
 
 class CollectionId implements IValueObject {
   private value: string
 
   constructor(value: string) {
-    // TODO: UUID であることを検証する
+    const isUuid = uuidValidate(value)
+    if (!isUuid) {
+      throw new NotUuidError()
+    }
+
     this.value = value
   }
 
-  public toString(): string {
+  static build(): CollectionId {
+    return new CollectionId(uuidv4())
+  }
+
+  toString(): string {
     return this.value
   }
 

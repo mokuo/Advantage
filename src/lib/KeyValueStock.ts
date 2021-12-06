@@ -5,11 +5,11 @@ class KeyValueStock {
     this.stock = {}
   }
 
-  public add(key: string, value: string) {
+  add(key: string, value: string) {
     this.stock[key] = value
   }
 
-  public  pop(key: string): string | undefined {
+  pop(key: string): string | undefined {
     const value = this.stock[key]
     delete this.stock[key]
     return value

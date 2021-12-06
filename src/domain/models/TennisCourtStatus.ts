@@ -9,7 +9,7 @@ class TennisCourtStatus implements IValueObject {
     this.value = value
   }
 
-  public toString(): Status {
+  toString(): Status {
     return this.value
   }
 

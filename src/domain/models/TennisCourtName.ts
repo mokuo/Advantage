@@ -7,7 +7,7 @@ class TennisCourtName implements IValueObject {
     this.value = value
   }
 
-  public toString(): string {
+  toString(): string {
     return this.value
   }
 

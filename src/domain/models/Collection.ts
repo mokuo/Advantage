@@ -2,11 +2,11 @@ import CollectionId from "./CollectionId";
 import TennisCourt from "./TennisCourt";
 
 class Collection {
-  private id: CollectionId
+  public id: CollectionId
 
-  private tennisCourts: TennisCourt[]
+  public tennisCourts: TennisCourt[]
 
-  private collectedAt: Date
+  public collectedAt: Date
 
   constructor(
     id: CollectionId,

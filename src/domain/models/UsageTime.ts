@@ -29,6 +29,14 @@ class UsageTime implements IValueObject {
     return this.startTime.isSame(other.startTime) &&
       this.endTime.isSame(other.endTime)
   }
+
+  getStartTime(): Date {
+    return this.startTime.toDate()
+  }
+
+  getEndTime(): Date {
+    return this.endTime.toDate()
+  }
 }
 
 export default UsageTime

@@ -1,7 +1,9 @@
 import Collection from "./Collection";
+import CollectionId from "./CollectionId";
 
 interface ICollectionRepository {
-  create: (collection: Collection) => Promise<void>
+  save: (collection: Collection) => Promise<void>
+  find: (collectionId: CollectionId) => Promise<Collection | undefined>
 }
 
 export default ICollectionRepository
