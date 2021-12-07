@@ -1,7 +1,6 @@
-import { CollectionReference, DocumentData, DocumentReference, DocumentSnapshot, QuerySnapshot, Transaction, WriteResult } from "@google-cloud/firestore";
-import IFirestoreDatabase from "./IFirestoreDatabase";
+import { CollectionReference, DocumentData, DocumentReference, DocumentSnapshot, QuerySnapshot, Transaction } from "@google-cloud/firestore";
 
-class FirestoreTransaction implements IFirestoreDatabase {
+class FirestoreTransaction {
   private transaction: Transaction
 
   constructor(transaction: Transaction) {
