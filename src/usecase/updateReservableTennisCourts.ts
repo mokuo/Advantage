@@ -5,10 +5,7 @@ import CollectionId from "@src/domain/models/CollectionId";
 import CollectionRepository from "@src/infrastructure/CollectionRepository";
 import FirestoreDatabase from "@src/infrastructure/FirestoreDatabase";
 
-const updateReservableTennisCourts = async (
-  factory: IReservationSystemRepositoriesFactory = new ReservationSystemRepositoriesFactory(),
-  db: FirestoreDatabase = new FirestoreDatabase() // TODO: 抽象化
-) => {
+const updateReservableTennisCourts = async (factory: IReservationSystemRepositoriesFactory = new ReservationSystemRepositoriesFactory()) => {
   const systemRepos = await factory.buildRepositories()
   const tennisCourts = (
     await Promise.all(
@@ -22,6 +19,7 @@ const updateReservableTennisCourts = async (
     new Date()
   )
 
+  const db = new FirestoreDatabase()
   // HACK: とりあえず eslint エラーを消しただけ
   // eslint-disable-next-line @typescript-eslint/no-floating-promises
   db.runTransaction(async (t) => {

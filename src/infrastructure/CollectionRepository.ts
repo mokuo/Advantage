@@ -1,6 +1,4 @@
-import { Firestore } from "@google-cloud/firestore";
-import FirestoreNormal from "./firestore/FirestoreNormal";
-import IFirestoreOperation from "./firestore/IFirestoreOperation";
+import FirestoreDatabase from "./FirestoreDatabase";
 import Collection from "@src/domain/models/Collection";
 import CollectionId from "@src/domain/models/CollectionId";
 import FacilityName from "@src/domain/models/FacilityName";
@@ -26,22 +24,19 @@ type TennisCourtData = {
 }
 
 class CollectionRepository implements ICollectionRepository {
-  private db: Firestore
-
-  private operation: IFirestoreOperation
-
-  constructor(operation: IFirestoreOperation = new FirestoreNormal()) {
-    this.db = new Firestore()
-    this.operation = operation
+  private db: FirestoreDatabase
+  
+  constructor(db = new FirestoreDatabase()) {
+    this.db = db
   }
 
   async save(collection: Collection): Promise<void> {
     const collectionData: CollectionData = {
       collectedAt: collection.collectedAt
     }
-    const docRef = this.db.collection(COLLECTION_NAME)
+    const collectionRef = this.db.collection(COLLECTION_NAME)
                       .doc(collection.id.toString())
-    await this.operation.set(docRef, collectionData)
+    await this.db.set(collectionRef, collectionData)
 
     await Promise.all(
       collection.tennisCourts.map(async (tennisCourt) => {
@@ -53,43 +48,40 @@ class CollectionRepository implements ICollectionRepository {
           status: tennisCourt.status.toString()
         }
 
-        const docRef2 = docRef.collection(SUB_COLLECTION_NAME)
-                              .doc(tennisCourt.id.toString())
-        await this.operation.set(docRef2, tennisCourtData)
+        const tennisCourtRef = collectionRef.collection(SUB_COLLECTION_NAME)
+                                            .doc(tennisCourt.id.toString())
+        await this.db.set(tennisCourtRef, tennisCourtData)
       })
     )
   }
 
   async find(collectionId: CollectionId): Promise<Collection | undefined> {
-    // TODO: トランザクション
-    //       Transaction を渡された場合、それを使ってデータを取り出すようにする
-    const docRef = this.db.collection(COLLECTION_NAME)
+    const collectionRef = this.db.collection(COLLECTION_NAME)
                    .doc(collectionId.toString())
-    const docSnapshot = await this.operation.get(docRef)
-    
-    if (docSnapshot.exists) {
-      const docData = docSnapshot.data()
-      const docData2 = await this.operation.getAll(docRef.collection(SUB_COLLECTION_NAME))
-      const tennisCourts: TennisCourt[] = docData2.docs.map(doc => {
-        const data = doc.data() as TennisCourtData
-
-        return new TennisCourt(
-          new TennisCourtId(doc.id),
-          new FacilityName(data.facilityName),
-          new TennisCourtName(data.name),
-          new UsageTime(data.startTime, data.endTime),
-          new TennisCourtStatus(data.status)
-        )
-      }),
-
-      return new Collection({
-        id: new CollectionId(docData.id),
-        tennisCourts,
-        collectedAt: docData.collectedAt
-      })
-    } 
+    const collectionSnapshot = await this.db.get(collectionRef)
+    const collectionData = collectionSnapshot.data()
+    if (collectionData === undefined) {
       return undefined
-    
+    }
+
+    const tennisCourtQuerySnapshot = await this.db.getAll(collectionRef.collection(SUB_COLLECTION_NAME))
+    const tennisCourts: TennisCourt[] = tennisCourtQuerySnapshot.docs.map(doc => {
+      const tennisCourtData = doc.data() as TennisCourtData
+
+      return new TennisCourt(
+        new TennisCourtId(doc.id),
+        FacilityName.fromString(tennisCourtData.facilityName),
+        new TennisCourtName(tennisCourtData.name),
+        new UsageTime(tennisCourtData.startTime, tennisCourtData.endTime),
+        TennisCourtStatus.fromString(tennisCourtData.status)
+      )
+    })
+
+    return new Collection(
+      new CollectionId(collectionSnapshot.id),
+      tennisCourts,
+      collectionData.collectedAt
+    )
   }
 }
 

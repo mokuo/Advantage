@@ -5,7 +5,7 @@ import ItabashiReservationSystemRepository from "../ItabashiReservationSystemRep
 jest.setTimeout(30000)
 
 describe("ItabashiReservationSystemRepository", () => {
-  it("hoge", async () => {
+  it("#getTennisCourts", async () => {
     const browser = await chromium.launch()
     const adapter = new ItabashiReservationSystemRepository(browser)
     const tennisCourts = await adapter.getTennisCourts()

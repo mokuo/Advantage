@@ -10,9 +10,16 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "jest",
+    "test": "FIRESTORE_EMULATOR_HOST=$npm_package_config_firestore_emulater_host jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "db:start": "gcloud beta emulators firestore start"
+    "db:start": "gcloud beta emulators firestore start --host-port=$npm_package_config_firestore_emulater_host"
+  },
+  "config": {
+    "firestore": {
+      "emulator": {
+        "host": "localhost:8080"
+      }
+    }
   },
   "repository": {
     "type": "git",
