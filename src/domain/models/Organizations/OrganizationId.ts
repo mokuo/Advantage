@@ -1,9 +1,9 @@
 import { v4 as uuidv4, validate as uuidValidate } from "uuid";
-import IValueObject from "./IValueObject";
+import IValueObject from "../IValueObject";
 
 class NotUuidError extends Error {}
 
-class CollectionId implements IValueObject {
+class OrganizationId implements IValueObject {
   private value: string
 
   constructor(value: string) {
@@ -15,17 +15,17 @@ class CollectionId implements IValueObject {
     this.value = value
   }
 
-  static build(): CollectionId {
-    return new CollectionId(uuidv4())
+  static build(): OrganizationId {
+    return new OrganizationId(uuidv4())
   }
 
   toString(): string {
     return this.value
   }
 
-  isEqual(other: CollectionId) {
+  isEqual(other: OrganizationId) {
     return this.value === other.value
   }
 }
 
-export default CollectionId
+export default OrganizationId

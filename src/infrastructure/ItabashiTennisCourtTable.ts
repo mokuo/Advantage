@@ -1,5 +1,5 @@
 import FacilityName from "@src/domain/models/FacilityName";
-import TennisCourt from "@src/domain/models/TennisCourt";
+import TennisCourtFrame from "@src/domain/models/TennisCourtFrame";
 import TennisCourtId from "@src/domain/models/TennisCourtId";
 import TennisCourtName from "@src/domain/models/TennisCourtName";
 import TennisCourtStatus from "@src/domain/models/TennisCourtStatus";
@@ -14,9 +14,9 @@ class ItabashiTennisCourtTable {
     this.table = table
   }
 
-  extractTennisCourts(): TennisCourt[] {
+  extractTennisCourts(): TennisCourtFrame[] {
     const days: string[] = this.table[1].slice(2)
-    const tennisCourts: TennisCourt[] = []
+    const tennisCourts: TennisCourtFrame[] = []
 
     // HACK: 予約枠の行を取り出して、forEach とかで回す
     for (let i = 3; i < this.table.length - 1; i += 1) {
@@ -30,7 +30,7 @@ class ItabashiTennisCourtTable {
         const tennisCourtStatus = this.buildTennisCourtStatus(frame)
         const usageTime = this.buildUsageTime(days[j], time)
         
-        const tennisCourt = new TennisCourt(
+        const tennisCourt = new TennisCourtFrame(
           TennisCourtId.build(),
           new FacilityName("itabashi"),
           tennisCourtName,

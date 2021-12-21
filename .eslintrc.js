@@ -40,6 +40,7 @@ module.exports = {
     "import/order": [2, { "alphabetize": { "order": "asc" }}],
     "quotes": [2, "double"],
     "class-methods-use-this": ["off"], // NOTE: this がなくても class を使いたい時がある
-    "max-classes-per-file": ["off"]
+    "max-classes-per-file": ["off"],
+    "@typescript-eslint/require-await": "off"
   },
 };

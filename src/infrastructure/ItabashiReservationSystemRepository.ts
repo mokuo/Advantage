@@ -1,7 +1,7 @@
 import BaseReservationSystemRepository from "./BaseReservationSystemRepository";
 import ItabashiTennisCourtTable from "./ItabashiTennisCourtTable";
 import IReservationSystemRepository from "@src/domain/models/IReservationSystemRepository";
-import TennisCourt from "@src/domain/models/TennisCourt";
+import TennisCourtFrame from "@src/domain/models/TennisCourtFrame"
 import parseHtmlTable from "@src/lib/parseHtmlTable";
 import sleep from "@src/lib/sleep";
 
@@ -11,7 +11,7 @@ const TENNIS_COURT_ROW_SIZE = 8
 
 class ItabashiReservationSystemRepository extends BaseReservationSystemRepository implements IReservationSystemRepository {
 
-  async getTennisCourts(): Promise<TennisCourt[]> {
+  async getTennisCourts(): Promise<TennisCourtFrame[]> {
     const context = await this.browser.newContext()
     const page = await context.newPage()
 
@@ -31,7 +31,7 @@ class ItabashiReservationSystemRepository extends BaseReservationSystemRepositor
 
     const html = await page.content()
     const table = parseHtmlTable(html, TABLE_SELECTOR)
-    const tennisCourts: TennisCourt[] = []
+    const tennisCourts: TennisCourtFrame[] = []
 
     // テニスコートの数だけテーブルを取り出す
     while (table.length >= TENNIS_COURT_ROW_SIZE) {

@@ -1,7 +1,7 @@
 import MockDate from "mockdate";
 import ItabashiTennisCourtTable from "../ItabashiTennisCourtTable";
 import FacilityName from "@src/domain/models/FacilityName";
-import TennisCourt from "@src/domain/models/TennisCourt";
+import TennisCourtFrame from "@src/domain/models/TennisCourtFrame";
 import TennisCourtName from "@src/domain/models/TennisCourtName";
 import TennisCourtStatus from "@src/domain/models/TennisCourtStatus";
 import UsageTime from "@src/domain/models/UsageTime";
@@ -21,13 +21,13 @@ describe("ItabashiTennisCourtName", () => {
         ["東板橋庭球場　３面", "15:00 ～16:00", "施設を利用できません", "施設を利用できません", "施設を利用できません", "施設を利用できません", "空いています", "予約済みです", "予約済みです"],
         ["ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン", "ページの先頭へボタン"],
       ]
-      const expectedFirstTennisCourt = new TennisCourt(
+      const expectedFirstTennisCourt = new TennisCourtFrame(
         new FacilityName("itabashi"),
         new TennisCourtName("東板橋庭球場　３面"),
         new UsageTime(new Date(2021, 10 - 1, 28, 9, 0), new Date(2021, 10 - 1, 28, 11, 0)),
         new TennisCourtStatus("unavailable")
       )
-      const expectedLastTennisCourt = new TennisCourt(
+      const expectedLastTennisCourt = new TennisCourtFrame(
         new FacilityName("itabashi"),
         new TennisCourtName("東板橋庭球場　３面"),
         new UsageTime(new Date(2021, 11 - 1, 3, 15, 0), new Date(2021, 11 - 1, 3, 16, 0)),

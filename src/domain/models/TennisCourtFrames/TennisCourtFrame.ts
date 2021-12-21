@@ -4,7 +4,7 @@ import TennisCourtName from "./TennisCourtName";
 import TennisCourtStatus from "./TennisCourtStatus";
 import UsageTime from "./UsageTime"
 
-class TennisCourt {
+class TennisCourtFrame {
   id: TennisCourtId
 
   facilityName: FacilityName
@@ -29,7 +29,7 @@ class TennisCourt {
     this.status = status
   }
 
-  isEqual(other: TennisCourt): boolean {
+  isEqual(other: TennisCourtFrame): boolean {
     return this.id.isEqual(other.id) &&
       this.facilityName.isEqual(other.facilityName) &&
       this.name.isEqual(other.name) &&
@@ -37,11 +37,11 @@ class TennisCourt {
       this.status.isEqual(other.status)
   }
 
-  isSameTennisCourt(other: TennisCourt): boolean {
+  isSameTennisCourt(other: TennisCourtFrame): boolean {
     return this.facilityName.isEqual(other.facilityName) &&
       this.name.isEqual(other.name) &&
       this.usageTime.isEqual(other.usageTime)
   }
 }
 
-export default TennisCourt;
+export default TennisCourtFrame;

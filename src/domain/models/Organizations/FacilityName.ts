@@ -1,9 +1,9 @@
-import IValueObject from "./IValueObject";
+import IValueObject from "../IValueObject";
 
 class UnknownFacilityNameError extends Error{}
 
 // ref: https://dackdive.hateblo.jp/entry/2019/08/13/090000
-const FACILITY_NAMES = ["itabashi"] as const
+const FACILITY_NAMES = ["東板橋庭球場"] as const
 type FacilityNameValue = typeof FACILITY_NAMES[number]
 
 class FacilityName implements IValueObject {
