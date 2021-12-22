@@ -1,4 +1,4 @@
-import FacilityName from "./FacilityName";
+import FacilityId from "../Organizations/FacilityId";
 import TennisCourtId from "./TennisCourtId";
 import TennisCourtName from "./TennisCourtName";
 import TennisCourtStatus from "./TennisCourtStatus";
@@ -7,7 +7,7 @@ import UsageTime from "./UsageTime"
 class TennisCourtFrame {
   id: TennisCourtId
 
-  facilityName: FacilityName
+  facilityId: FacilityId
 
   name: TennisCourtName
 
@@ -17,28 +17,24 @@ class TennisCourtFrame {
 
   constructor(
     id: TennisCourtId,
-    facilityName: FacilityName,
+    facilityId: FacilityId,
     name: TennisCourtName,
     usageTime: UsageTime,
     status: TennisCourtStatus
   ) {
     this.id = id
-    this.facilityName = facilityName
+    this.facilityId = facilityId
     this.name = name
     this.usageTime = usageTime
     this.status = status
   }
 
   isEqual(other: TennisCourtFrame): boolean {
-    return this.id.isEqual(other.id) &&
-      this.facilityName.isEqual(other.facilityName) &&
-      this.name.isEqual(other.name) &&
-      this.usageTime.isEqual(other.usageTime) &&
-      this.status.isEqual(other.status)
+    return this.id.isEqual(other.id)
   }
 
-  isSameTennisCourt(other: TennisCourtFrame): boolean {
-    return this.facilityName.isEqual(other.facilityName) &&
+  isSameFrame(other: TennisCourtFrame): boolean {
+    return this.facilityId.isEqual(other.facilityId) &&
       this.name.isEqual(other.name) &&
       this.usageTime.isEqual(other.usageTime)
   }

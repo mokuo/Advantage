@@ -1,7 +1,7 @@
-import BaseReservationSystemRepository from "./BaseReservationSystemRepository";
+import BaseTennisCourtFrameRepository from "./BaseTennisCourtFrameRepository";
 import ItabashiTennisCourtTable from "./ItabashiTennisCourtTable";
-import IReservationSystemRepository from "@src/domain/models/IReservationSystemRepository";
-import TennisCourtFrame from "@src/domain/models/TennisCourtFrame"
+import ITennisCourtFrameRepository from "@src/domain/models/TennisCourtFrames/ITennisCourtFrameRepository";
+import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFrame";
 import parseHtmlTable from "@src/lib/parseHtmlTable";
 import sleep from "@src/lib/sleep";
 
@@ -9,9 +9,8 @@ const URL = "https://www.itabashi-shisetsu-yoyaku.jp/eshisetsu/menu/Login.cgi"
 const TABLE_SELECTOR = "table [summary='選択した施設・時間帯の空き状況を確認するための表。']"
 const TENNIS_COURT_ROW_SIZE = 8
 
-class ItabashiReservationSystemRepository extends BaseReservationSystemRepository implements IReservationSystemRepository {
-
-  async getTennisCourts(): Promise<TennisCourtFrame[]> {
+class ItabashiTennisCourtFrameRepository extends BaseTennisCourtFrameRepository implements ITennisCourtFrameRepository {
+  async all(): Promise<TennisCourtFrame[]> {
     const context = await this.browser.newContext()
     const page = await context.newPage()
 
@@ -31,19 +30,19 @@ class ItabashiReservationSystemRepository extends BaseReservationSystemRepositor
 
     const html = await page.content()
     const table = parseHtmlTable(html, TABLE_SELECTOR)
-    const tennisCourts: TennisCourtFrame[] = []
+    const tennisCourtFrames: TennisCourtFrame[] = []
 
     // テニスコートの数だけテーブルを取り出す
     while (table.length >= TENNIS_COURT_ROW_SIZE) {
       const tennisCourtTable = table.splice(0, TENNIS_COURT_ROW_SIZE)
       const itabashiTennisCourtTable = new ItabashiTennisCourtTable(tennisCourtTable)
-      tennisCourts.push(...itabashiTennisCourtTable.extractTennisCourts())
+      tennisCourtFrames.push(...itabashiTennisCourtTable.extractTennisCourts())
 
       table.splice(0) // 空行を削除
     }
 
-    return tennisCourts
+    return tennisCourtFrames
   }
 }
 
-export default ItabashiReservationSystemRepository
+export default ItabashiTennisCourtFrameRepository

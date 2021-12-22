@@ -1,9 +1,9 @@
-import FacilityName from "@src/domain/models/FacilityName";
-import TennisCourtFrame from "@src/domain/models/TennisCourtFrame";
-import TennisCourtId from "@src/domain/models/TennisCourtId";
-import TennisCourtName from "@src/domain/models/TennisCourtName";
-import TennisCourtStatus from "@src/domain/models/TennisCourtStatus";
-import UsageTime from "@src/domain/models/UsageTime";
+import FacilityId from "@src/domain/models/Organizations/FacilityId";
+import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFrame";
+import TennisCourtId from "@src/domain/models/TennisCourtFrames/TennisCourtId";
+import TennisCourtName from "@src/domain/models/TennisCourtFrames/TennisCourtName";
+import TennisCourtStatus from "@src/domain/models/TennisCourtFrames/TennisCourtStatus";
+import UsageTime from "@src/domain/models/TennisCourtFrames/UsageTime";
 
 class UnexpectedValueError extends Error {}
 
@@ -16,7 +16,7 @@ class ItabashiTennisCourtTable {
 
   extractTennisCourts(): TennisCourtFrame[] {
     const days: string[] = this.table[1].slice(2)
-    const tennisCourts: TennisCourtFrame[] = []
+    const tennisCourtFrames: TennisCourtFrame[] = []
 
     // HACK: 予約枠の行を取り出して、forEach とかで回す
     for (let i = 3; i < this.table.length - 1; i += 1) {
@@ -37,11 +37,11 @@ class ItabashiTennisCourtTable {
           usageTime,
           tennisCourtStatus
         )
-        tennisCourts.push(tennisCourt)
+        tennisCourtFrames.push(tennisCourt)
       }
     }
 
-    return tennisCourts 
+    return tennisCourtFrames 
   }
 
   private buildTennisCourtStatus(value: string): TennisCourtStatus {
