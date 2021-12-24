@@ -1,6 +1,6 @@
 import dayjs, { Dayjs } from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
-import IValueObject from "./IValueObject";
+import IValueObject from "../IValueObject";
 
 dayjs.extend(isSameOrAfter)
 

@@ -1,4 +1,4 @@
-import IValueObject from "./IValueObject";
+import IValueObject from "../IValueObject";
 
 class UnknownStatusError extends Error{}
 

@@ -1,15 +1,14 @@
-import BaseReservationSystemRepository from "../BaseReservationSystemRepository";
-import IOrganizationRepository from "@src/domain/models/IOrganizationRepository";
 import Facility from "@src/domain/models/Organizations/Facility";
 import FacilityId from "@src/domain/models/Organizations/FacilityId";
 import FacilityName from "@src/domain/models/Organizations/FacilityName";
+import IOrganizationRepository from "@src/domain/models/Organizations/IOrganizationRepository";
 import Organization from "@src/domain/models/Organizations/Organization";
 import OrganizationId from "@src/domain/models/Organizations/OrganizationId";
 import OrganizationName from "@src/domain/models/Organizations/OrganizationName";
 
 const ORGANIZATIONS: Organization[] = [
   new Organization(
-    new OrganizationId("df0748f8-d762-493c-87be-22 744a23878e"),
+    new OrganizationId("df0748f8-d762-493c-87be-22744a23878e"),
     new OrganizationName("板橋区"),
     [
       new Facility(
@@ -20,11 +19,15 @@ const ORGANIZATIONS: Organization[] = [
   )
 ]
 
-class OrganizationRepository extends BaseReservationSystemRepository implements IOrganizationRepository {
+class OrganizationRepository implements IOrganizationRepository {
 
   // TODO: エラーなく初期化できることをテストする
   async all() {
     return ORGANIZATIONS
+  }
+
+  async findByName(name: OrganizationName) {
+    return ORGANIZATIONS.find(org => org.name.isEqual(name))
   }
 }
 

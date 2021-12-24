@@ -1,4 +1,4 @@
-import IValueObject from "./IValueObject";
+import IValueObject from "../IValueObject";
 
 class TennisCourtName implements IValueObject {
   private value: string

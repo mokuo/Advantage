@@ -1,4 +1,7 @@
-import FacilityId from "@src/domain/models/Organizations/FacilityId";
+import OrganizationRepository from "../Organizations/OrganizationRepository";
+import Facility from "@src/domain/models/Organizations/Facility";
+import FacilityName from "@src/domain/models/Organizations/FacilityName";
+import OrganizationName from "@src/domain/models/Organizations/OrganizationName";
 import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFrame";
 import TennisCourtId from "@src/domain/models/TennisCourtFrames/TennisCourtId";
 import TennisCourtName from "@src/domain/models/TennisCourtFrames/TennisCourtName";
@@ -6,17 +9,24 @@ import TennisCourtStatus from "@src/domain/models/TennisCourtFrames/TennisCourtS
 import UsageTime from "@src/domain/models/TennisCourtFrames/UsageTime";
 
 class UnexpectedValueError extends Error {}
+class FacilityNotFoundError extends Error {}
+
+const ORGANIZATION_NAME = "板橋区"
+const FACILITY_NAME = "東板橋庭球場"
 
 class ItabashiTennisCourtTable {
   private table: string[][]
   
   constructor(table: string[][]) {
     this.table = table
+    // HACK: 移行期間？なのか、15:00~16:00 が2行あるので、片方取り除く
+    this.table.splice(7,1)
   }
 
-  extractTennisCourts(): TennisCourtFrame[] {
+  async extractTennisCourts(): Promise<TennisCourtFrame[]> {
     const days: string[] = this.table[1].slice(2)
     const tennisCourtFrames: TennisCourtFrame[] = []
+    const facility = await this.getFacility()
 
     // HACK: 予約枠の行を取り出して、forEach とかで回す
     for (let i = 3; i < this.table.length - 1; i += 1) {
@@ -32,7 +42,7 @@ class ItabashiTennisCourtTable {
         
         const tennisCourt = new TennisCourtFrame(
           TennisCourtId.build(),
-          new FacilityName("itabashi"),
+          facility.id,
           tennisCourtName,
           usageTime,
           tennisCourtStatus
@@ -82,6 +92,15 @@ class ItabashiTennisCourtTable {
 
     // NOTE: month が今月より前の場合は来年、それ以外は今年と判断する。今月来月くらいしか表示しない前提。
     return month < thisMonth ? thisYear + 1 : thisYear
+  }
+
+  private async getFacility(): Promise<Facility> {
+    const orgRepo = new OrganizationRepository()
+    const org = await orgRepo.findByName(new OrganizationName(ORGANIZATION_NAME))
+    const facility = org?.findFacilityByName(new FacilityName(FACILITY_NAME))
+    if (facility === undefined) { throw new FacilityNotFoundError() }
+
+    return facility
   }
 }
 

@@ -11,6 +11,7 @@
   },
   "scripts": {
     "test": "FIRESTORE_EMULATOR_HOST=$npm_package_config_firestore_emulater_host jest",
+    "test:watch": "FIRESTORE_EMULATOR_HOST=$npm_package_config_firestore_emulater_host jest --watch",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "db:start": "gcloud beta emulators firestore start --host-port=$npm_package_config_firestore_emulater_host"
   },
