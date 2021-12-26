@@ -5,19 +5,13 @@ import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFr
 
 class TennisCourtFrameRepository implements ITennisCourtFrameRepository {
   async all(): Promise<TennisCourtFrame[]> {
-    const browser = await chromium.launch()
-    const repos: ITennisCourtFrameRepository[] = [
-      new ItabashiTennisCourtFrameRepository(browser)
-    ]
+    const browser = await chromium.launch();
+    const repos: ITennisCourtFrameRepository[] = [new ItabashiTennisCourtFrameRepository(browser)];
 
-    const tennisCourtFrames = (
-      await Promise.all(
-        repos.map(async (repo) => repo.all())
-      )
-    ).flat()
+    const tennisCourtFrames = (await Promise.all(repos.map(async (repo) => repo.all()))).flat();
 
-    return tennisCourtFrames
+    return tennisCourtFrames;
   }
 }
 
-export default TennisCourtFrameRepository
+export default TennisCourtFrameRepository;

@@ -4,28 +4,28 @@ import IValueObject from "../IValueObject";
 class NotUuidError extends Error {}
 
 class TennisCourtId implements IValueObject {
-  private value: string
+  private value: string;
 
   constructor(value: string) {
-    const isUuid = uuidValidate(value)
+    const isUuid = uuidValidate(value);
     if (!isUuid) {
-      throw new NotUuidError()
+      throw new NotUuidError();
     }
 
-    this.value = value
+    this.value = value;
   }
 
   static build(): TennisCourtId {
-    return new TennisCourtId(uuidv4())
+    return new TennisCourtId(uuidv4());
   }
 
   toString(): string {
-    return this.value
+    return this.value;
   }
 
   isEqual(other: TennisCourtId) {
-    return this.value === other.value
+    return this.value === other.value;
   }
 }
 
-export default TennisCourtId
+export default TennisCourtId;

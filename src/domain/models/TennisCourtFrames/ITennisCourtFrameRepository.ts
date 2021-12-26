@@ -1,7 +1,7 @@
-import TennisCourtFrame from "./TennisCourtFrame"
+import TennisCourtFrame from "./TennisCourtFrame";
 
 interface ITennisCourtFrameRepository {
-  all: () => Promise<TennisCourtFrame[]>
+  all: () => Promise<TennisCourtFrame[]>;
 }
 
-export default ITennisCourtFrameRepository
+export default ITennisCourtFrameRepository;

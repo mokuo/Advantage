@@ -1,16 +1,16 @@
 import { Page, Browser } from "playwright";
 
 class BaseReservationSystemRepository {
-  protected browser: Browser
+  protected browser: Browser;
 
   constructor(browser: Browser) {
-    this.browser = browser
+    this.browser = browser;
   }
 
   protected async waitAndClick(page: Page, selector: string) {
-    await page.waitForSelector(selector)
-    await page.click(selector)
+    await page.waitForSelector(selector);
+    await page.click(selector);
   }
 }
 
-export default BaseReservationSystemRepository
+export default BaseReservationSystemRepository;

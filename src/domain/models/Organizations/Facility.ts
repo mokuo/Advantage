@@ -1,15 +1,15 @@
 import FacilityId from "./FacilityId";
-import FacilityName from "./FacilityName"
+import FacilityName from "./FacilityName";
 
 class Facility {
-  id: FacilityId
+  id: FacilityId;
 
-  name: FacilityName
+  name: FacilityName;
 
   constructor(id: FacilityId, name: FacilityName) {
-    this.id = id 
-    this.name = name
+    this.id = id;
+    this.name = name;
   }
 }
 
-export default Facility
+export default Facility;

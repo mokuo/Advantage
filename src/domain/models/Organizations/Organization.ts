@@ -4,21 +4,21 @@ import OrganizationId from "./OrganizationId";
 import OrganizationName from "./OrganizationName";
 
 class Organization {
-  id: OrganizationId
+  id: OrganizationId;
 
-  name: OrganizationName
+  name: OrganizationName;
 
-  facilities: Facility[]
+  facilities: Facility[];
 
   constructor(id: OrganizationId, name: OrganizationName, facilities: Facility[]) {
-    this.id = id
-    this.name = name
-    this.facilities = facilities
+    this.id = id;
+    this.name = name;
+    this.facilities = facilities;
   }
 
   findFacilityByName(name: FacilityName): Facility | undefined {
-    return this.facilities.find(facility => facility.name.isEqual(name))
+    return this.facilities.find((facility) => facility.name.isEqual(name));
   }
 }
 
-export default Organization
+export default Organization;

@@ -6,96 +6,97 @@ import {
   Firestore,
   QuerySnapshot,
   Transaction,
-  WriteBatch
+  WriteBatch,
 } from "@google-cloud/firestore";
 
 class UnknownOperationTypeError extends Error {}
 class WriteOnlyError extends Error {}
 
-type FirestoreOperation = { type: "normal" } |
-  { type: "transaction", transaction: Transaction } |
-  { type: "batch", batch: WriteBatch }
-type Callback = (db: FirestoreDatabase) => Promise<void>
+type FirestoreOperation =
+  | { type: "normal" }
+  | { type: "transaction"; transaction: Transaction }
+  | { type: "batch"; batch: WriteBatch };
+type Callback = (db: FirestoreDatabase) => Promise<void>;
 
 const initializeFirestore = (): Firestore => {
   if (process.env.NODE_ENV === "test") {
-    return new Firestore({ projectId: "test-project" })
+    return new Firestore({ projectId: "test-project" });
   }
 
-  return new Firestore()
-}
+  return new Firestore();
+};
 
 class FirestoreDatabase {
-  private firestore: Firestore
+  private firestore: Firestore;
 
-  private operation: FirestoreOperation
+  private operation: FirestoreOperation;
 
   constructor(operation: FirestoreOperation = { type: "normal" }) {
-    this.operation = operation
-    this.firestore = initializeFirestore()
+    this.operation = operation;
+    this.firestore = initializeFirestore();
   }
 
   static async runTransaction(callback: Callback): Promise<void> {
-    const firestore = new Firestore()
-    await firestore.runTransaction<void>(async transaction => {
-      const operation = new FirestoreDatabase({ type: "transaction", transaction })
-      await callback(operation)
-    })
+    const firestore = new Firestore();
+    await firestore.runTransaction<void>(async (transaction) => {
+      const operation = new FirestoreDatabase({ type: "transaction", transaction });
+      await callback(operation);
+    });
   }
 
   static async runBatch(callback: Callback): Promise<void> {
-    const firestore = new Firestore()
-    const batch = firestore.batch()
-    const operation = new FirestoreDatabase({ type: "batch", batch })
-    await callback(operation)
-    await batch.commit()
+    const firestore = new Firestore();
+    const batch = firestore.batch();
+    const operation = new FirestoreDatabase({ type: "batch", batch });
+    await callback(operation);
+    await batch.commit();
   }
 
   collection(collectionPath: string) {
-    return this.firestore.collection(collectionPath)
+    return this.firestore.collection(collectionPath);
   }
 
   async set(docRef: DocumentReference, data: DocumentData): Promise<void> {
     switch (this.operation.type) {
       case "normal":
-        await docRef.set(data)
+        await docRef.set(data);
         break;
       case "transaction":
-        this.operation.transaction.set(docRef, data)
+        this.operation.transaction.set(docRef, data);
         break;
       case "batch":
-        this.operation.batch.set(docRef, data)
-        break
+        this.operation.batch.set(docRef, data);
+        break;
       default:
-        throw new UnknownOperationTypeError()
+        throw new UnknownOperationTypeError();
     }
   }
 
   async get(docRef: DocumentReference): Promise<DocumentSnapshot> {
     switch (this.operation.type) {
       case "normal":
-        return docRef.get()
+        return docRef.get();
       case "transaction":
-        return this.operation.transaction.get(docRef)
+        return this.operation.transaction.get(docRef);
       case "batch":
-        throw new WriteOnlyError()
+        throw new WriteOnlyError();
       default:
-        throw new UnknownOperationTypeError()
+        throw new UnknownOperationTypeError();
     }
   }
 
   async getAll(colRef: CollectionReference): Promise<QuerySnapshot> {
     switch (this.operation.type) {
       case "normal":
-        return colRef.get()
+        return colRef.get();
       case "transaction":
-        return this.operation.transaction.get(colRef)
+        return this.operation.transaction.get(colRef);
       case "batch":
-        throw new WriteOnlyError()
+        throw new WriteOnlyError();
       default:
-        throw new UnknownOperationTypeError()
+        throw new UnknownOperationTypeError();
     }
   }
 }
 
-export default FirestoreDatabase
+export default FirestoreDatabase;

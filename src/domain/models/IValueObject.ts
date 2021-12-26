@@ -1,5 +1,5 @@
 interface IValueObject {
-  isEqual: (other: any) => boolean
+  isEqual: (other: any) => boolean;
 }
 
-export default IValueObject
+export default IValueObject;
