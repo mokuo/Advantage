@@ -1,7 +1,3 @@
 {
-  "recommendations": [
-    "jebbs.plantuml",
-    "yzhang.markdown-all-in-one",
-    "dbaeumer.vscode-eslint"
-  ]
+  "recommendations": ["jebbs.plantuml", "yzhang.markdown-all-in-one", "dbaeumer.vscode-eslint"]
 }

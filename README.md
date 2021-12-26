@@ -12,7 +12,7 @@
 
 - Java
 - Graphviz
-- [PlantUML \- Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml) 
+- [PlantUML \- Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml)
 
 ### Installation
 
