@@ -6,7 +6,7 @@ const updateTennisCourtFrames = async (repo: ITennisCourtFrameRepository = new T
   const tennisCourtFrames = await repo.all(); // eslint-disable-line @typescript-eslint/no-unused-vars
 
   // HACK: とりあえず eslint エラーを消しただけ
-  // eslint-disable-next-line @typescript-eslint/no-floating-promises
+  // eslint-disable-next-line @typescript-eslint/no-floating-promises, @typescript-eslint/no-unused-vars
   FirestoreDatabase.runTransaction(async (t) => {
     // eslint-disable-line @typescript-eslint/no-unused-vars
     // TODO: TennisCoutFrame を更新する

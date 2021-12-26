@@ -16,6 +16,7 @@
     "eslint:fix": "eslint --fix . --ext .js,.jsx,.ts,.tsx",
     "prettier:check": "prettier --check src/",
     "prettier:write": "prettier --write src/",
+    "lint:fix": "npm run eslint:fix; npm run prettier:write",
     "db:start": "gcloud beta emulators firestore start --host-port=$npm_package_config_firestore_emulater_host"
   },
   "config": {
