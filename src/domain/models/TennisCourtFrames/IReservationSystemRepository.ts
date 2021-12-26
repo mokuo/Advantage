@@ -1,7 +1,7 @@
 import TennisCourtFrame from "./TennisCourtFrame";
 
-interface ITennisCourtFrameRepository {
+interface IReservationSystemRepository {
   all: () => Promise<TennisCourtFrame[]>;
 }
 
-export default ITennisCourtFrameRepository;
+export default IReservationSystemRepository;

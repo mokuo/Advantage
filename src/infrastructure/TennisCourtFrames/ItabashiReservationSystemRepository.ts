@@ -1,6 +1,6 @@
-import BaseTennisCourtFrameRepository from "./BaseTennisCourtFrameRepository";
+import BaseReservationSystemRepository from "./BaseReservationSystemRepository";
 import ItabashiTennisCourtTable from "./ItabashiTennisCourtTable";
-import ITennisCourtFrameRepository from "@src/domain/models/TennisCourtFrames/ITennisCourtFrameRepository";
+import IReservationSystemRepository from "@src/domain/models/TennisCourtFrames/IReservationSystemRepository";
 import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFrame";
 import parseHtmlTable from "@src/lib/parseHtmlTable";
 import sleep from "@src/lib/sleep";
@@ -11,7 +11,10 @@ const TABLE_SELECTOR = "table [summary='選択した施設・時間帯の空き�
 // const TENNIS_COURT_ROW_SIZE = 8
 const TENNIS_COURT_ROW_SIZE = 9;
 
-class ItabashiTennisCourtFrameRepository extends BaseTennisCourtFrameRepository implements ITennisCourtFrameRepository {
+class ItabashiReservationSystemRepository
+  extends BaseReservationSystemRepository
+  implements IReservationSystemRepository
+{
   async all(): Promise<TennisCourtFrame[]> {
     const context = await this.browser.newContext();
     const page = await context.newPage();
@@ -50,4 +53,4 @@ class ItabashiTennisCourtFrameRepository extends BaseTennisCourtFrameRepository 
   }
 }
 
-export default ItabashiTennisCourtFrameRepository;
+export default ItabashiReservationSystemRepository;

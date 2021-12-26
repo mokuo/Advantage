@@ -1,8 +1,8 @@
-import ITennisCourtFrameRepository from "@src/domain/models/TennisCourtFrames/ITennisCourtFrameRepository";
+import IReservationSystemRepository from "@src/domain/models/TennisCourtFrames/IReservationSystemRepository";
 import FirestoreDatabase from "@src/infrastructure/FirestoreDatabase";
-import TennisCourtFrameRepository from "@src/infrastructure/TennisCourtFrames/TennisCourtFrameRepository";
+import ReservationSystemRepository from "@src/infrastructure/TennisCourtFrames/ReservationSystemRepository";
 
-const updateTennisCourtFrames = async (repo: ITennisCourtFrameRepository = new TennisCourtFrameRepository()) => {
+const updateTennisCourtFrames = async (repo: IReservationSystemRepository = new ReservationSystemRepository()) => {
   const tennisCourtFrames = await repo.all(); // eslint-disable-line @typescript-eslint/no-unused-vars
 
   // HACK: とりあえず eslint エラーを消しただけ
