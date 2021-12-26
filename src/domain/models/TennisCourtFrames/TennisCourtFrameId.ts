@@ -3,7 +3,7 @@ import IValueObject from "../IValueObject";
 
 class NotUuidError extends Error {}
 
-class TennisCourtId implements IValueObject {
+class TennisCourtFrameId implements IValueObject {
   private value: string;
 
   constructor(value: string) {
@@ -15,17 +15,17 @@ class TennisCourtId implements IValueObject {
     this.value = value;
   }
 
-  static build(): TennisCourtId {
-    return new TennisCourtId(uuidv4());
+  static build(): TennisCourtFrameId {
+    return new TennisCourtFrameId(uuidv4());
   }
 
   toString(): string {
     return this.value;
   }
 
-  isEqual(other: TennisCourtId) {
+  isEqual(other: TennisCourtFrameId) {
     return this.value === other.value;
   }
 }
 
-export default TennisCourtId;
+export default TennisCourtFrameId;

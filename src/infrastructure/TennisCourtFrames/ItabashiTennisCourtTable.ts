@@ -3,9 +3,9 @@ import Facility from "@src/domain/models/Organizations/Facility";
 import FacilityName from "@src/domain/models/Organizations/FacilityName";
 import OrganizationName from "@src/domain/models/Organizations/OrganizationName";
 import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFrame";
-import TennisCourtId from "@src/domain/models/TennisCourtFrames/TennisCourtId";
+import TennisCourtFrameId from "@src/domain/models/TennisCourtFrames/TennisCourtFrameId";
+import TennisCourtFrameStatus from "@src/domain/models/TennisCourtFrames/TennisCourtFrameStatus";
 import TennisCourtName from "@src/domain/models/TennisCourtFrames/TennisCourtName";
-import TennisCourtStatus from "@src/domain/models/TennisCourtFrames/TennisCourtStatus";
 import UsageTime from "@src/domain/models/TennisCourtFrames/UsageTime";
 
 class UnexpectedValueError extends Error {}
@@ -37,15 +37,15 @@ class ItabashiTennisCourtTable {
 
       for (let j = 0; j < reservationFrames.length; j += 1) {
         const frame = reservationFrames[j];
-        const tennisCourtStatus = this.buildTennisCourtStatus(frame);
+        const tennisCourtFrameStatus = this.buildTennisCourtFrameStatus(frame);
         const usageTime = this.buildUsageTime(days[j], time);
 
         const tennisCourt = new TennisCourtFrame(
-          TennisCourtId.build(),
+          TennisCourtFrameId.build(),
           facility.id,
           tennisCourtName,
           usageTime,
-          tennisCourtStatus
+          tennisCourtFrameStatus
         );
         tennisCourtFrames.push(tennisCourt);
       }
@@ -54,8 +54,8 @@ class ItabashiTennisCourtTable {
     return tennisCourtFrames;
   }
 
-  private buildTennisCourtStatus(value: string): TennisCourtStatus {
-    return new TennisCourtStatus(value === "空いています" ? "available" : "unavailable");
+  private buildTennisCourtFrameStatus(value: string): TennisCourtFrameStatus {
+    return new TennisCourtFrameStatus(value === "空いています" ? "available" : "unavailable");
   }
 
   private buildUsageTime(rawDate: string, rawTime: string) {

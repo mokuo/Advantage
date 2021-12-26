@@ -27,7 +27,7 @@ const initializeFirestore = (): Firestore => {
 };
 
 class FirestoreDatabase {
-  private firestore: Firestore;
+  public firestore: Firestore;
 
   private operation: FirestoreOperation;
 
