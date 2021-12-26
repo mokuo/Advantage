@@ -1,0 +1,24 @@
+# ref:
+#   - https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs-or-python
+#   - https://github.com/actions/setup-node
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+      - run: npm install
+      - run: npm run eslint
+      - run: npm run prettier:check
+      - run: npm test
