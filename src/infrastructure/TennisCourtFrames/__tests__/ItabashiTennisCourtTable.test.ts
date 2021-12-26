@@ -1,4 +1,4 @@
-import MockDate from "mockdate";
+import MockDate from "mockdate"; // eslint-disable-line node/no-unpublished-import
 import ItabashiTennisCourtTable from "../ItabashiTennisCourtTable";
 import FacilityName from "@src/domain/models/Organizations/FacilityName";
 import OrganizationName from "@src/domain/models/Organizations/OrganizationName";
