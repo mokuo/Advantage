@@ -58,6 +58,7 @@
   },
   "dependencies": {
     "@google-cloud/firestore": "^4.15.1",
+    "@grpc/grpc-js": "^1.4.5",
     "app-root-path": "^3.0.0",
     "dayjs": "^1.10.7",
     "jsdom": "^17.0.0",
