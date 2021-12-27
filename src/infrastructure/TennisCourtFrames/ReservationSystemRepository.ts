@@ -9,6 +9,8 @@ class ReservationSystemRepository implements IReservationSystemRepository {
     const repos: IReservationSystemRepository[] = [new ItabashiReservationSystemRepository(browser)];
 
     const tennisCourtFrames = (await Promise.all(repos.map(async (repo) => repo.all()))).flat();
+    // ref: https://zenn.dev/kyo9bo/articles/ff89fbeaff0c7e
+    await browser.close();
 
     return tennisCourtFrames;
   }

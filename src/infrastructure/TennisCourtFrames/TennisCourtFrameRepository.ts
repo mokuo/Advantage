@@ -34,8 +34,9 @@ class TennisCourtFrameRepository {
         new TennisCourtFrameId(docSnapshot.id),
         new FacilityId(data.facilityId),
         new TennisCourtName(data.name),
-        new UsageTime(data.startDate, data.endDate),
-        new TennisCourtFrameStatus(data.status)
+        // ref: https://googleapis.dev/nodejs/firestore/latest/Timestamp.html#toDate
+        new UsageTime(data.startTime.toDate(), data.endTime.toDate()),
+        TennisCourtFrameStatus.fromString(data.status)
       )
     );
   }
@@ -50,7 +51,6 @@ class TennisCourtFrameRepository {
       endTime: frame.usageTime.getEndTime(),
       status: frame.status.toString(),
     };
-
     await this.db.set(docRef, data);
   }
 

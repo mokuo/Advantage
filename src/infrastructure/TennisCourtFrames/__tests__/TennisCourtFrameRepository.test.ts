@@ -7,9 +7,12 @@ import TennisCourtName from "@src/domain/models/TennisCourtFrames/TennisCourtNam
 import UsageTime from "@src/domain/models/TennisCourtFrames/UsageTime";
 import FirestoreDatabase from "@src/infrastructure/FirestoreDatabase";
 
+// fix: `thrown: "Exceeded timeout of 5000 ms for a test.`
+jest.setTimeout(30000);
+
 describe("TennisCourtFrameRepository", () => {
   describe("#find", () => {
-    it("hoge", async () => {
+    it("TennisCourtFrameId から TennisCourtFrame を取得できる", async () => {
       const repo = new TennisCourtFrameRepository(new FirestoreDatabase());
 
       const frameId = TennisCourtFrameId.build();

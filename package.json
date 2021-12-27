@@ -10,21 +10,14 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "FIRESTORE_EMULATOR_HOST=$npm_package_config_firestore_emulater_host jest",
-    "test:watch": "FIRESTORE_EMULATOR_HOST=$npm_package_config_firestore_emulater_host jest --watch",
+    "test": "export DB_PORT=8080; export TZ=Asia/Tokyo; jest",
+    "test:watch": "export DB_PORT=8080; export TZ=Asia/Tokyo; jest --watch",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "eslint:fix": "eslint --fix . --ext .js,.jsx,.ts,.tsx",
     "prettier:check": "prettier --check .",
     "prettier:write": "prettier --write .",
     "lint:fix": "npm run eslint:fix; npm run prettier:write",
-    "db:start": "gcloud beta emulators firestore start --host-port=$npm_package_config_firestore_emulater_host"
-  },
-  "config": {
-    "firestore": {
-      "emulator": {
-        "host": "localhost:8080"
-      }
-    }
+    "db:start": "gcloud beta emulators firestore start --host-port=localhost:8080"
   },
   "repository": {
     "type": "git",
