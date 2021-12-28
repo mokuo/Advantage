@@ -1,3 +1,4 @@
+import { Timestamp } from "@google-cloud/firestore";
 import FirestoreDatabase from "../FirestoreDatabase";
 import FacilityId from "@src/domain/models/Organizations/FacilityId";
 import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFrame";
@@ -8,12 +9,16 @@ import UsageTime from "@src/domain/models/TennisCourtFrames/UsageTime";
 
 const COLLECTION_NAME = "tennis-court-frames";
 
-type TennisCourtFrameData = {
+type TennisCourtFrameWriteData = {
   facilityId: string;
   name: string;
   startTime: Date;
   endTime: Date;
   status: string;
+};
+type TennisCourtFrameReadData = TennisCourtFrameWriteData & {
+  startTime: Timestamp;
+  endTime: Timestamp;
 };
 
 class TennisCourtFrameRepository {
@@ -26,7 +31,7 @@ class TennisCourtFrameRepository {
   async find(id: TennisCourtFrameId) {
     const docRef = this.getDocRef(id);
     const docSnapshot = await this.db.get(docRef);
-    const data = docSnapshot.data();
+    const data = docSnapshot.data() as TennisCourtFrameReadData | undefined;
 
     return (
       data &&
@@ -44,7 +49,7 @@ class TennisCourtFrameRepository {
   async save(frame: TennisCourtFrame) {
     const docRef = this.getDocRef(frame.id);
 
-    const data: TennisCourtFrameData = {
+    const data: TennisCourtFrameWriteData = {
       facilityId: frame.facilityId.toString(),
       name: frame.name.toString(),
       startTime: frame.usageTime.getStartTime(),

@@ -4,8 +4,8 @@ import FacilityName from "@src/domain/models/Organizations/FacilityName";
 import OrganizationName from "@src/domain/models/Organizations/OrganizationName";
 import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFrame";
 import TennisCourtFrameId from "@src/domain/models/TennisCourtFrames/TennisCourtFrameId";
-import TennisCourtName from "@src/domain/models/TennisCourtFrames/TennisCourtName";
 import TennisCourtFrameStatus from "@src/domain/models/TennisCourtFrames/TennisCourtFrameStatus";
+import TennisCourtName from "@src/domain/models/TennisCourtFrames/TennisCourtName";
 import UsageTime from "@src/domain/models/TennisCourtFrames/UsageTime";
 import OrganizationRepository from "@src/infrastructure/Organizations/OrganizationRepository";
 
