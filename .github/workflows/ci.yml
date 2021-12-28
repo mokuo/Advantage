@@ -21,4 +21,8 @@ jobs:
       - run: npm install
       - run: npm run eslint
       - run: npm run prettier:check
+      - name: Install Google Cloud SDK
+        run: snap install google-cloud-sdk --classic
+      - name: Start firestore emulator
+        run: npm run db:start
       - run: npm test
