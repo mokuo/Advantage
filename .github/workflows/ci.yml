@@ -27,6 +27,5 @@ jobs:
         run: gcloud components install beta
       - name: "Install Cloud Firestore Emulator component"
         run: gcloud components install cloud-firestore-emulator
-      - name: Start firestore emulator
-        run: npm run db:start
-      - run: npm test
+      - name: Run tests
+        run: npm run db:start & npm test
