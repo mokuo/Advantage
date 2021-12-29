@@ -34,6 +34,8 @@ class ItabashiReservationSystemRepository
     await page.waitForSelector(TABLE_SELECTOR);
 
     const html = await page.content();
+    await page.close();
+
     const table = parseHtmlTable(html, TABLE_SELECTOR);
     const tennisCourtFrames: TennisCourtFrame[] = [];
 
