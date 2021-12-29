@@ -9,6 +9,7 @@ describe("ItabashiReservationSystemRepository", () => {
     const browser = await chromium.launch();
     const repo = new ItabashiReservationSystemRepository(browser);
     const tennisCourts = await repo.all();
+    await browser.close();
 
     expect(tennisCourts.length > 0).toBeTruthy();
   });
