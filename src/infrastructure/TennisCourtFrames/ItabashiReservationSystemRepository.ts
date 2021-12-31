@@ -26,8 +26,8 @@ class ItabashiReservationSystemRepository
     await this.waitAndClick(page, "tr[onclick*='E00']"); // スポーツ（屋外）
     await this.waitAndClick(page, "tr[onclick*='E06']"); // 硬式テニス
     await this.waitAndClick(page, "tr:nth-child(8)"); // 東板橋庭球場（３，４面）
-    await sleep(1000); // 「東板橋庭球場（３，４面）」にチェックが入るまで待つ
-    // await page.waitForSelector("img#i_record6[alt='選択済み']") // 「東板橋庭球場（３，４面）」にチェックが入るまで待つ
+    // await sleep(10000); // 「東板橋庭球場（３，４面）」にチェックが入るまで待つ
+    await page.waitForSelector("img#i_record6[alt='選択済み']"); // 「東板橋庭球場（３，４面）」にチェックが入るまで待つ
     await this.waitAndClick(page, "img[alt='次に進むボタン']"); // 次に進む
     await this.waitAndClick(page, "img[alt='31日表示 未選択']"); // ３１日表示
     await this.waitAndClick(page, "img[alt='表示ボタン']"); // 表示
