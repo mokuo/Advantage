@@ -1,11 +1,11 @@
 import FacilityId from "../Organizations/FacilityId";
-import TennisCourtId from "./TennisCourtId";
+import TennisCourtFrameId from "./TennisCourtFrameId";
+import TennisCourtFrameStatus from "./TennisCourtFrameStatus";
 import TennisCourtName from "./TennisCourtName";
-import TennisCourtStatus from "./TennisCourtStatus";
 import UsageTime from "./UsageTime";
 
 class TennisCourtFrame {
-  id: TennisCourtId;
+  id: TennisCourtFrameId;
 
   facilityId: FacilityId;
 
@@ -13,14 +13,14 @@ class TennisCourtFrame {
 
   usageTime: UsageTime;
 
-  status: TennisCourtStatus;
+  status: TennisCourtFrameStatus;
 
   constructor(
-    id: TennisCourtId,
+    id: TennisCourtFrameId,
     facilityId: FacilityId,
     name: TennisCourtName,
     usageTime: UsageTime,
-    status: TennisCourtStatus
+    status: TennisCourtFrameStatus
   ) {
     this.id = id;
     this.facilityId = facilityId;

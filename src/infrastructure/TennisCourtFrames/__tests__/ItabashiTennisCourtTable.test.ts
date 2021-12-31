@@ -3,9 +3,9 @@ import ItabashiTennisCourtTable from "../ItabashiTennisCourtTable";
 import FacilityName from "@src/domain/models/Organizations/FacilityName";
 import OrganizationName from "@src/domain/models/Organizations/OrganizationName";
 import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFrame";
-import TennisCourtId from "@src/domain/models/TennisCourtFrames/TennisCourtId";
+import TennisCourtFrameId from "@src/domain/models/TennisCourtFrames/TennisCourtFrameId";
+import TennisCourtFrameStatus from "@src/domain/models/TennisCourtFrames/TennisCourtFrameStatus";
 import TennisCourtName from "@src/domain/models/TennisCourtFrames/TennisCourtName";
-import TennisCourtStatus from "@src/domain/models/TennisCourtFrames/TennisCourtStatus";
 import UsageTime from "@src/domain/models/TennisCourtFrames/UsageTime";
 import OrganizationRepository from "@src/infrastructure/Organizations/OrganizationRepository";
 
@@ -102,18 +102,18 @@ describe("ItabashiTennisCourtName", () => {
         ],
       ];
       const expectedFirstTennisCourt = new TennisCourtFrame(
-        TennisCourtId.build(),
+        TennisCourtFrameId.build(),
         facility.id,
         new TennisCourtName("東板橋庭球場　３面"),
         new UsageTime(new Date(2021, 10 - 1, 28, 9, 0), new Date(2021, 10 - 1, 28, 11, 0)),
-        new TennisCourtStatus("unavailable")
+        new TennisCourtFrameStatus("unavailable")
       );
       const expectedLastTennisCourt = new TennisCourtFrame(
-        TennisCourtId.build(),
+        TennisCourtFrameId.build(),
         facility.id,
         new TennisCourtName("東板橋庭球場　３面"),
         new UsageTime(new Date(2021, 11 - 1, 3, 15, 0), new Date(2021, 11 - 1, 3, 16, 0)),
-        new TennisCourtStatus("unavailable")
+        new TennisCourtFrameStatus("unavailable")
       );
 
       const itabashiTennisCourtTable = new ItabashiTennisCourtTable(table);

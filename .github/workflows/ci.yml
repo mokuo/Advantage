@@ -21,4 +21,12 @@ jobs:
       - run: npm install
       - run: npm run eslint
       - run: npm run prettier:check
-      - run: npm test
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v0"
+      - name: "Install gcloud Beta Commands component"
+        run: gcloud components install beta
+      - name: "Install Cloud Firestore Emulator component"
+        run: gcloud components install cloud-firestore-emulator
+      - uses: microsoft/playwright-github-action@v1
+      - name: Run tests
+        run: npm run db:start & npm test

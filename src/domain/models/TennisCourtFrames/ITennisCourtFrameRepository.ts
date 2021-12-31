@@ -1,7 +1,9 @@
 import TennisCourtFrame from "./TennisCourtFrame";
+import TennisCourtFrameId from "./TennisCourtFrameId";
 
-interface ITennisCourtFrameRepository {
-  all: () => Promise<TennisCourtFrame[]>;
+interface IReservationSystemRepository {
+  find: (id: TennisCourtFrameId) => Promise<TennisCourtFrame | undefined>;
+  save: (frame: TennisCourtFrame) => Promise<void>;
 }
 
-export default ITennisCourtFrameRepository;
+export default IReservationSystemRepository;

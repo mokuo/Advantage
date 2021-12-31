@@ -8,6 +8,7 @@ import {
   Transaction,
   WriteBatch,
 } from "@google-cloud/firestore";
+import { credentials } from "@grpc/grpc-js";
 
 class UnknownOperationTypeError extends Error {}
 class WriteOnlyError extends Error {}
@@ -20,14 +21,21 @@ type Callback = (db: FirestoreDatabase) => Promise<void>;
 
 const initializeFirestore = (): Firestore => {
   if (process.env.NODE_ENV === "test") {
-    return new Firestore({ projectId: "test-project" });
+    // ref: https://github.com/googleapis/nodejs-firestore/issues/674
+    // ref: https://github.com/firebase/firebase-admin-node/issues/472
+    return new Firestore({
+      projectId: "test-project",
+      port: Number(process.env.DB_PORT),
+      servicePath: "localhost",
+      sslCreds: credentials.createInsecure(),
+    });
   }
 
   return new Firestore();
 };
 
 class FirestoreDatabase {
-  private firestore: Firestore;
+  public firestore: Firestore;
 
   private operation: FirestoreOperation;
 

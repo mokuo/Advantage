@@ -6,28 +6,28 @@ class UnknownStatusError extends Error {}
 const STATUSES = ["available", "unavailable"] as const;
 type Status = typeof STATUSES[number];
 
-class TennisCourtStatus implements IValueObject {
+class TennisCourtFrameStatus implements IValueObject {
   private value: Status;
 
   constructor(value: Status) {
     this.value = value;
   }
 
-  static fromString(value: string): TennisCourtStatus {
+  static fromString(value: string): TennisCourtFrameStatus {
     if (!STATUSES.includes(value as Status)) {
       throw new UnknownStatusError();
     }
 
-    return new TennisCourtStatus(value as Status);
+    return new TennisCourtFrameStatus(value as Status);
   }
 
   toString(): Status {
     return this.value;
   }
 
-  isEqual(other: TennisCourtStatus) {
+  isEqual(other: TennisCourtFrameStatus) {
     return this.value === other.value;
   }
 }
 
-export default TennisCourtStatus;
+export default TennisCourtFrameStatus;
