@@ -7,6 +7,8 @@ import TennisCourtFrameStatus from "@src/domain/models/TennisCourtFrames/TennisC
 import TennisCourtName from "@src/domain/models/TennisCourtFrames/TennisCourtName";
 import UsageTime from "@src/domain/models/TennisCourtFrames/UsageTime";
 
+class UndefinedIdError extends Error {}
+
 const COLLECTION_NAME = "tennis-court-frames";
 
 type TennisCourtFrameWriteData = {
@@ -36,19 +38,22 @@ class TennisCourtFrameRepository {
     return (
       data &&
       new TennisCourtFrame(
-        new TennisCourtFrameId(docSnapshot.id),
         new FacilityId(data.facilityId),
         new TennisCourtName(data.name),
         // ref: https://googleapis.dev/nodejs/firestore/latest/Timestamp.html#toDate
         new UsageTime(data.startTime.toDate(), data.endTime.toDate()),
-        TennisCourtFrameStatus.fromString(data.status)
+        TennisCourtFrameStatus.fromString(data.status),
+        new TennisCourtFrameId(docSnapshot.id)
       )
     );
   }
 
   async save(frame: TennisCourtFrame) {
-    const docRef = this.getDocRef(frame.id);
+    if (frame.id === undefined) {
+      throw new UndefinedIdError();
+    }
 
+    const docRef = this.getDocRef(frame.id);
     const data: TennisCourtFrameWriteData = {
       facilityId: frame.facilityId.toString(),
       name: frame.name.toString(),
