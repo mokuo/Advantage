@@ -11,22 +11,22 @@ import FirestoreDatabase from "@src/infrastructure/FirestoreDatabase";
 jest.setTimeout(30000);
 
 describe("TennisCourtFrameRepository", () => {
-  describe("#find", () => {
-    it("TennisCourtFrameId から TennisCourtFrame を取得できる", async () => {
+  describe("#find, #save", () => {
+    it("TennisCourtFrame を永続化し、再取得できる", async () => {
       const repo = new TennisCourtFrameRepository(new FirestoreDatabase());
 
       const frameId = TennisCourtFrameId.build();
       const frame = new TennisCourtFrame(
-        frameId,
         FacilityId.build(),
         new TennisCourtName("テストテニスコート"),
         new UsageTime(new Date(2021, 12, 26, 15), new Date(2021, 12, 26, 17)),
-        new TennisCourtFrameStatus("available")
+        new TennisCourtFrameStatus("available"),
+        frameId
       );
       await repo.save(frame);
 
       const foundFrame = await repo.find(frameId);
-      expect(foundFrame?.id.isEqual(frame.id)).toBeTruthy();
+      expect(foundFrame?.isEqual(frame)).toBeTruthy();
       expect(foundFrame?.isSameFrame(foundFrame)).toBeTruthy();
     });
   });

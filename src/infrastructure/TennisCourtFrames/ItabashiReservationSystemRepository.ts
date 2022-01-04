@@ -6,9 +6,7 @@ import parseHtmlTable from "@src/lib/parseHtmlTable";
 
 const URL = "https://www.itabashi-shisetsu-yoyaku.jp/eshisetsu/menu/Login.cgi";
 const TABLE_SELECTOR = "table [summary='選択した施設・時間帯の空き状況を確認するための表。']";
-// HACK: 移行期間？なのか、15:00~16:00 が2行ある
-// const TENNIS_COURT_ROW_SIZE = 8
-const TENNIS_COURT_ROW_SIZE = 9;
+const TENNIS_COURT_ROW_SIZE = 8;
 
 class ItabashiReservationSystemRepository
   extends BaseReservationSystemRepository

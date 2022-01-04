@@ -5,7 +5,7 @@ import TennisCourtName from "./TennisCourtName";
 import UsageTime from "./UsageTime";
 
 class TennisCourtFrame {
-  id: TennisCourtFrameId;
+  id?: TennisCourtFrameId;
 
   facilityId: FacilityId;
 
@@ -16,11 +16,11 @@ class TennisCourtFrame {
   status: TennisCourtFrameStatus;
 
   constructor(
-    id: TennisCourtFrameId,
     facilityId: FacilityId,
     name: TennisCourtName,
     usageTime: UsageTime,
-    status: TennisCourtFrameStatus
+    status: TennisCourtFrameStatus,
+    id?: TennisCourtFrameId
   ) {
     this.id = id;
     this.facilityId = facilityId;
@@ -30,6 +30,8 @@ class TennisCourtFrame {
   }
 
   isEqual(other: TennisCourtFrame): boolean {
+    if (this.id === undefined || other.id === undefined) return false;
+
     return this.id.isEqual(other.id);
   }
 
@@ -39,6 +41,10 @@ class TennisCourtFrame {
       this.name.isEqual(other.name) &&
       this.usageTime.isEqual(other.usageTime)
     );
+  }
+
+  setStatus(status: TennisCourtFrameStatus) {
+    this.status = status;
   }
 }
 
