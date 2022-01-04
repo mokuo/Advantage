@@ -19,8 +19,6 @@ class ItabashiTennisCourtTable {
 
   constructor(table: string[][]) {
     this.table = table;
-    // HACK: 移行期間？なのか、15:00~16:00 が2行あるので、片方取り除く
-    this.table.splice(7, 1);
   }
 
   async extractTennisCourts(): Promise<TennisCourtFrame[]> {
