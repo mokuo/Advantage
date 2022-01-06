@@ -65,6 +65,11 @@ class TennisCourtFrameRepository implements ITennisCourtFrameRepository {
     await this.db.set(docRef, data);
   }
 
+  async delete(id: TennisCourtFrameId) {
+    const docRef = this.getDocRef(id);
+    await this.db.delete(docRef);
+  }
+
   async all() {
     const colRef = this.getColRef();
     const querySnapshot = await this.db.getAll(colRef);

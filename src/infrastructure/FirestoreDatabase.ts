@@ -93,6 +93,22 @@ class FirestoreDatabase {
     }
   }
 
+  async delete(docRef: DocumentReference): Promise<void> {
+    switch (this.operation.type) {
+      case "normal":
+        await docRef.delete();
+        break;
+      case "transaction":
+        this.operation.transaction.delete(docRef);
+        break;
+      case "batch":
+        this.operation.batch.delete(docRef);
+        break;
+      default:
+        throw new UnknownOperationTypeError();
+    }
+  }
+
   async getAll(colRef: CollectionReference): Promise<QuerySnapshot> {
     switch (this.operation.type) {
       case "normal":
