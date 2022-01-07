@@ -4,6 +4,7 @@ import TennisCourtFrameStatus from "./TennisCourtFrameStatus";
 import TennisCourtName from "./TennisCourtName";
 import UsageTime from "./UsageTime";
 
+class IdAlreadyExistsError extends Error {}
 class TennisCourtFrame {
   id?: TennisCourtFrameId;
 
@@ -45,6 +46,14 @@ class TennisCourtFrame {
 
   setStatus(status: TennisCourtFrameStatus) {
     this.status = status;
+  }
+
+  buildId() {
+    if (this.id !== undefined) {
+      throw new IdAlreadyExistsError();
+    }
+
+    this.id = TennisCourtFrameId.build();
   }
 }
 
