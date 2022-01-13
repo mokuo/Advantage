@@ -30,8 +30,6 @@ class TennisCourtFrame {
   }
 
   isEqual(other: TennisCourtFrame): boolean {
-    if (this.id === undefined || other.id === undefined) return false;
-
     return this.id.isEqual(other.id);
   }
 
