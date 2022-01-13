@@ -39,23 +39,23 @@ class FirestoreDatabase {
 
   private operation: FirestoreOperation;
 
-  constructor(operation: FirestoreOperation = { type: "normal" }) {
+  constructor(firestore: Firestore = initializeFirestore(), operation: FirestoreOperation = { type: "normal" }) {
+    this.firestore = firestore;
     this.operation = operation;
-    this.firestore = initializeFirestore();
   }
 
   static async runTransaction(callback: Callback): Promise<void> {
-    const firestore = new Firestore();
+    const firestore = initializeFirestore();
     await firestore.runTransaction<void>(async (transaction) => {
-      const operation = new FirestoreDatabase({ type: "transaction", transaction });
+      const operation = new FirestoreDatabase(firestore, { type: "transaction", transaction });
       await callback(operation);
     });
   }
 
   static async runBatch(callback: Callback): Promise<void> {
-    const firestore = new Firestore();
+    const firestore = initializeFirestore();
     const batch = firestore.batch();
-    const operation = new FirestoreDatabase({ type: "batch", batch });
+    const operation = new FirestoreDatabase(firestore, { type: "batch", batch });
     await callback(operation);
     await batch.commit();
   }

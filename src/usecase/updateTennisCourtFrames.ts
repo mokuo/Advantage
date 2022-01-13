@@ -10,7 +10,7 @@ const updateTennisCourtFrames = async (
   const newTennisCourtFrames = await reservationSystem.all();
 
   // eslint-disable-next-line @typescript-eslint/no-floating-promises
-  FirestoreDatabase.runTransaction(async (t) => {
+  await FirestoreDatabase.runTransaction(async (t) => {
     const repo = new TennisCourtFrameRepository(t);
     const oldTennisCourtFrames = await repo.all();
     const service = new TennisCourtFramesDiffService();
