@@ -39,23 +39,23 @@ class FirestoreDatabase {
 
   private operation: FirestoreOperation;
 
-  constructor(operation: FirestoreOperation = { type: "normal" }) {
+  constructor(firestore: Firestore = initializeFirestore(), operation: FirestoreOperation = { type: "normal" }) {
+    this.firestore = firestore;
     this.operation = operation;
-    this.firestore = initializeFirestore();
   }
 
   static async runTransaction(callback: Callback): Promise<void> {
-    const firestore = new Firestore();
+    const firestore = initializeFirestore();
     await firestore.runTransaction<void>(async (transaction) => {
-      const operation = new FirestoreDatabase({ type: "transaction", transaction });
+      const operation = new FirestoreDatabase(firestore, { type: "transaction", transaction });
       await callback(operation);
     });
   }
 
   static async runBatch(callback: Callback): Promise<void> {
-    const firestore = new Firestore();
+    const firestore = initializeFirestore();
     const batch = firestore.batch();
-    const operation = new FirestoreDatabase({ type: "batch", batch });
+    const operation = new FirestoreDatabase(firestore, { type: "batch", batch });
     await callback(operation);
     await batch.commit();
   }
@@ -88,6 +88,22 @@ class FirestoreDatabase {
         return this.operation.transaction.get(docRef);
       case "batch":
         throw new WriteOnlyError();
+      default:
+        throw new UnknownOperationTypeError();
+    }
+  }
+
+  async delete(docRef: DocumentReference): Promise<void> {
+    switch (this.operation.type) {
+      case "normal":
+        await docRef.delete();
+        break;
+      case "transaction":
+        this.operation.transaction.delete(docRef);
+        break;
+      case "batch":
+        this.operation.batch.delete(docRef);
+        break;
       default:
         throw new UnknownOperationTypeError();
     }

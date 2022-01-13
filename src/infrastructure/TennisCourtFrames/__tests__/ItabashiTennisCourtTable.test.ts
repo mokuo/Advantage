@@ -102,18 +102,18 @@ describe("ItabashiTennisCourtName", () => {
         ],
       ];
       const expectedFirstTennisCourt = new TennisCourtFrame(
+        TennisCourtFrameId.build(),
         facility.id,
         new TennisCourtName("東板橋庭球場　３面"),
         new UsageTime(new Date(2021, 10 - 1, 28, 9, 0), new Date(2021, 10 - 1, 28, 11, 0)),
-        new TennisCourtFrameStatus("unavailable"),
-        TennisCourtFrameId.build()
+        new TennisCourtFrameStatus("unavailable")
       );
       const expectedLastTennisCourt = new TennisCourtFrame(
+        TennisCourtFrameId.build(),
         facility.id,
         new TennisCourtName("東板橋庭球場　３面"),
         new UsageTime(new Date(2021, 11 - 1, 3, 15, 0), new Date(2021, 11 - 1, 3, 16, 0)),
-        new TennisCourtFrameStatus("unavailable"),
-        TennisCourtFrameId.build()
+        new TennisCourtFrameStatus("unavailable")
       );
 
       const itabashiTennisCourtTable = new ItabashiTennisCourtTable(table);

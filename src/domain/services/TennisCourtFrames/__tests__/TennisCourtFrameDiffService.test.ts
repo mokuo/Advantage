@@ -11,41 +11,44 @@ describe("TennisCourtFramesDiffService", () => {
     const facilityId = FacilityId.build();
     const oldFrames = [
       new TennisCourtFrame( // 削除される
+        TennisCourtFrameId.build(),
         facilityId,
         new TennisCourtName("テストテニスコート１"),
         new UsageTime(new Date(2021, 12, 26, 15), new Date(2021, 12, 26, 17)),
-        new TennisCourtFrameStatus("available"),
-        TennisCourtFrameId.build()
+        new TennisCourtFrameStatus("available")
       ),
       new TennisCourtFrame( // 利用可能になる
+        TennisCourtFrameId.build(),
         facilityId,
         new TennisCourtName("テストテニスコート１"),
         new UsageTime(new Date(2021, 12, 31, 15), new Date(2021, 12, 31, 17)),
-        new TennisCourtFrameStatus("unavailable"),
-        TennisCourtFrameId.build()
+        new TennisCourtFrameStatus("unavailable")
       ),
       new TennisCourtFrame( // 変わらない
+        TennisCourtFrameId.build(),
         facilityId,
         new TennisCourtName("テストテニスコート２"),
         new UsageTime(new Date(2021, 12, 31, 15), new Date(2021, 12, 31, 17)),
-        new TennisCourtFrameStatus("unavailable"),
-        TennisCourtFrameId.build()
+        new TennisCourtFrameStatus("unavailable")
       ),
     ];
     const newFrames = [
       new TennisCourtFrame( // 利用可能になる
+        TennisCourtFrameId.build(),
         facilityId,
         new TennisCourtName("テストテニスコート１"),
         new UsageTime(new Date(2021, 12, 31, 15), new Date(2021, 12, 31, 17)),
         new TennisCourtFrameStatus("available")
       ),
       new TennisCourtFrame( // 変わらない
+        TennisCourtFrameId.build(),
         facilityId,
         new TennisCourtName("テストテニスコート２"),
         new UsageTime(new Date(2021, 12, 31, 15), new Date(2021, 12, 31, 17)),
         new TennisCourtFrameStatus("unavailable")
       ),
       new TennisCourtFrame( // 追加される
+        TennisCourtFrameId.build(),
         facilityId,
         new TennisCourtName("テストテニスコート２"),
         new UsageTime(new Date(2022, 1, 1, 15), new Date(2022, 1, 1, 17)),
