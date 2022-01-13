@@ -26,11 +26,11 @@ describe("TennisCourtFrameRepository", () => {
 
     it("TennisCourtFrame を永続化し、再取得できる", async () => {
       const frame = new TennisCourtFrame(
+        frameId,
         FacilityId.build(),
         new TennisCourtName("テストテニスコート"),
         new UsageTime(new Date(2021, 12, 26, 15), new Date(2021, 12, 26, 17)),
-        new TennisCourtFrameStatus("available"),
-        frameId
+        new TennisCourtFrameStatus("available")
       );
       await repo.save(frame);
 
@@ -49,11 +49,11 @@ describe("TennisCourtFrameRepository", () => {
       frameId = TennisCourtFrameId.build();
 
       const frame = new TennisCourtFrame(
+        frameId,
         FacilityId.build(),
         new TennisCourtName("テストテニスコート"),
         new UsageTime(new Date(2022, 1 - 1, 6, 15), new Date(2022, 1 - 1, 6, 17)),
-        new TennisCourtFrameStatus("available"),
-        frameId
+        new TennisCourtFrameStatus("available")
       );
       await repo.save(frame);
     });
@@ -86,20 +86,20 @@ describe("TennisCourtFrameRepository", () => {
       frameId2 = TennisCourtFrameId.build();
 
       frame1 = new TennisCourtFrame(
+        frameId1,
         FacilityId.build(),
         new TennisCourtName("テストテニスコート1"),
         new UsageTime(new Date(2021, 12, 26, 15), new Date(2021, 12, 26, 17)),
-        new TennisCourtFrameStatus("available"),
-        frameId1
+        new TennisCourtFrameStatus("available")
       );
       await repo.save(frame1);
 
       frame2 = new TennisCourtFrame(
+        frameId2,
         FacilityId.build(),
         new TennisCourtName("テストテニスコート2"),
         new UsageTime(new Date(2021, 12, 26, 15), new Date(2021, 12, 26, 17)),
-        new TennisCourtFrameStatus("available"),
-        frameId2
+        new TennisCourtFrameStatus("available")
       );
       await repo.save(frame2);
     });

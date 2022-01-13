@@ -39,12 +39,12 @@ class TennisCourtFrameRepository implements ITennisCourtFrameRepository {
     return (
       data &&
       new TennisCourtFrame(
+        new TennisCourtFrameId(docSnapshot.id),
         new FacilityId(data.facilityId),
         new TennisCourtName(data.name),
         // ref: https://googleapis.dev/nodejs/firestore/latest/Timestamp.html#toDate
         new UsageTime(data.startTime.toDate(), data.endTime.toDate()),
-        TennisCourtFrameStatus.fromString(data.status),
-        new TennisCourtFrameId(docSnapshot.id)
+        TennisCourtFrameStatus.fromString(data.status)
       )
     );
   }
@@ -76,12 +76,12 @@ class TennisCourtFrameRepository implements ITennisCourtFrameRepository {
     return querySnapshot.docs.map((doc) => {
       const data = doc.data() as TennisCourtFrameReadData;
       return new TennisCourtFrame(
+        new TennisCourtFrameId(doc.id),
         new FacilityId(data.facilityId),
         new TennisCourtName(data.name),
         // ref: https://googleapis.dev/nodejs/firestore/latest/Timestamp.html#toDate
         new UsageTime(data.startTime.toDate(), data.endTime.toDate()),
-        TennisCourtFrameStatus.fromString(data.status),
-        new TennisCourtFrameId(doc.id)
+        TennisCourtFrameStatus.fromString(data.status)
       );
     });
   }

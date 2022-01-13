@@ -39,11 +39,11 @@ class ItabashiTennisCourtTable {
         const usageTime = this.buildUsageTime(days[j], time);
 
         const tennisCourt = new TennisCourtFrame(
+          TennisCourtFrameId.build(),
           facility.id,
           tennisCourtName,
           usageTime,
-          tennisCourtFrameStatus,
-          TennisCourtFrameId.build()
+          tennisCourtFrameStatus
         );
         tennisCourtFrames.push(tennisCourt);
       }

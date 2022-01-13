@@ -4,9 +4,8 @@ import TennisCourtFrameStatus from "./TennisCourtFrameStatus";
 import TennisCourtName from "./TennisCourtName";
 import UsageTime from "./UsageTime";
 
-class IdAlreadyExistsError extends Error {}
 class TennisCourtFrame {
-  id?: TennisCourtFrameId;
+  id: TennisCourtFrameId;
 
   facilityId: FacilityId;
 
@@ -17,11 +16,11 @@ class TennisCourtFrame {
   status: TennisCourtFrameStatus;
 
   constructor(
+    id: TennisCourtFrameId,
     facilityId: FacilityId,
     name: TennisCourtName,
     usageTime: UsageTime,
-    status: TennisCourtFrameStatus,
-    id?: TennisCourtFrameId
+    status: TennisCourtFrameStatus
   ) {
     this.id = id;
     this.facilityId = facilityId;
@@ -46,14 +45,6 @@ class TennisCourtFrame {
 
   setStatus(status: TennisCourtFrameStatus) {
     this.status = status;
-  }
-
-  buildId() {
-    if (this.id !== undefined) {
-      throw new IdAlreadyExistsError();
-    }
-
-    this.id = TennisCourtFrameId.build();
   }
 }
 

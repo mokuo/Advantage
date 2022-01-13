@@ -3,20 +3,21 @@ import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFr
 import FirestoreDatabase from "@src/infrastructure/FirestoreDatabase";
 import TennisCourtFrameRepository from "@src/infrastructure/TennisCourtFrames/TennisCourtFrameRepository";
 
+// fix: `thrown: "Exceeded timeout of 5000 ms for a test.`
+jest.setTimeout(30000);
+
 describe("updateTennisCourtFrames()", () => {
   let repo: TennisCourtFrameRepository;
-  let savedFrames: TennisCourtFrame[];
+  let savedFrames: TennisCourtFrame[] = [];
 
   beforeEach(() => {
     repo = new TennisCourtFrameRepository(new FirestoreDatabase());
   });
 
-  afterEach(() => {
-    // HACK: とりあえず通す
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    FirestoreDatabase.runBatch(async (t) => {
+  afterEach(async () => {
+    await FirestoreDatabase.runBatch(async (t) => {
       repo = new TennisCourtFrameRepository(t);
-      await Promise.all(savedFrames.map((frame) => repo.delete(frame.id!)));
+      await Promise.all(savedFrames.map((frame) => repo.delete(frame.id)));
     });
   });
 
