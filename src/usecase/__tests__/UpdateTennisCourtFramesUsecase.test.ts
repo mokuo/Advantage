@@ -1,4 +1,4 @@
-import updateTennisCourtFrames from "../updateTennisCourtFrames";
+import UpdateTennisCourtFramesUsecase from "../UpdateTennisCourtFramesUsecase";
 import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFrame";
 import FirestoreDatabase from "@src/infrastructure/FirestoreDatabase";
 import TennisCourtFrameRepository from "@src/infrastructure/TennisCourtFrames/TennisCourtFrameRepository";
@@ -22,7 +22,8 @@ describe("updateTennisCourtFrames()", () => {
   });
 
   it("予約枠が１つ以上保存されること", async () => {
-    await updateTennisCourtFrames();
+    const usecase = new UpdateTennisCourtFramesUsecase();
+    await usecase.update();
 
     savedFrames = await repo.all();
     expect(savedFrames.length).toBeGreaterThan(0);
