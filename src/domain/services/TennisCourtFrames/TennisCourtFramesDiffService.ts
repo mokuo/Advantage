@@ -27,7 +27,7 @@ class TennisCourtFramesDiffService {
         return;
       }
 
-      // ステータスが変わっていれば changed
+      // ステータスが変わっていれば changed に入れる
       oldFrame.setStatus(newFrame.status);
       changed.push(oldFrame);
       oldFramesToDelete.splice(oldFrameIndex, 1);

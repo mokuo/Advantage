@@ -1,14 +1,23 @@
+import MessageBuilder from "./MessageBuilder";
 import IReservationSystemRepository from "@src/domain/models/TennisCourtFrames/IReservationSystemRepository";
 import TennisCourtFramesDiffService from "@src/domain/services/TennisCourtFrames/TennisCourtFramesDiffService";
 import FirestoreDatabase from "@src/infrastructure/FirestoreDatabase";
+import LineAdapter from "@src/infrastructure/LineAdapter";
+import OrganizationRepository from "@src/infrastructure/Organizations/OrganizationRepository";
 import ReservationSystemRepository from "@src/infrastructure/TennisCourtFrames/ReservationSystemRepository";
 import TennisCourtFrameRepository from "@src/infrastructure/TennisCourtFrames/TennisCourtFrameRepository";
 
 class UpdateTennisCourtFramesUsecase {
   private reservationSystemRepo: IReservationSystemRepository;
 
-  constructor(reservationSystemRepo: IReservationSystemRepository = new ReservationSystemRepository()) {
+  private lineAdapter: LineAdapter;
+
+  constructor(
+    reservationSystemRepo: IReservationSystemRepository = new ReservationSystemRepository(),
+    lineAdapter: LineAdapter = new LineAdapter()
+  ) {
     this.reservationSystemRepo = reservationSystemRepo;
+    this.lineAdapter = lineAdapter;
   }
 
   async update() {
@@ -23,9 +32,12 @@ class UpdateTennisCourtFramesUsecase {
       await Promise.all(deleted.map((frame) => repo.delete(frame.id)));
       await Promise.all(changed.map((frame) => repo.save(frame)));
       await Promise.all(added.map((frame) => repo.save(frame)));
-    });
 
-    // TODO: 新たに空きが出ていれば通知する
+      const orgRepo = new OrganizationRepository(t);
+      const organizations = await orgRepo.all();
+      const message = new MessageBuilder().buildMessage(organizations, changed.concat(added));
+      await this.lineAdapter.sendMessage(message);
+    });
   }
 }
 

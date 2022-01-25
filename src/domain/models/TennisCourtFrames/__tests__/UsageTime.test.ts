@@ -25,4 +25,13 @@ describe("UsageTime", () => {
       });
     });
   });
+
+  describe("#toString", () => {
+    it("文字列を見やすい形で返す", () => {
+      const usageTime = new UsageTime(new Date(2022, 1 - 1, 25, 9), new Date(2022, 1 - 1, 25, 11));
+      const expectedText = "2022-01-25 09:00~11:00";
+
+      expect(usageTime.toString()).toEqual(expectedText);
+    });
+  });
 });

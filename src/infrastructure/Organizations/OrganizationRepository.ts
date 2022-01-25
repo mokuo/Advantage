@@ -18,6 +18,10 @@ class OrganizationRepository implements IOrganizationRepository {
     return ORGANIZATIONS;
   }
 
+  async findById(id: OrganizationId) {
+    return ORGANIZATIONS.find((org) => org.id.isEqual(id));
+  }
+
   async findByName(name: OrganizationName) {
     return ORGANIZATIONS.find((org) => org.name.isEqual(name));
   }
