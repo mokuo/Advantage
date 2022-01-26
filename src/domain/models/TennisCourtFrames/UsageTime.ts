@@ -36,6 +36,10 @@ class UsageTime implements IValueObject {
   getEndTime(): Date {
     return this.endTime.toDate();
   }
+
+  toString(): string {
+    return `${this.startTime.format("YYYY-MM-DD HH:mm")}~${this.endTime.format("HH:mm")}`;
+  }
 }
 
 export default UsageTime;

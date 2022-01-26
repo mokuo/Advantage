@@ -1,9 +1,9 @@
 import Organization from "./Organization";
 import OrganizationName from "./OrganizationName";
 
-interface IReservationSystemRepository {
+interface IORganizationRepository {
   all: () => Promise<Organization[]>;
   findByName: (name: OrganizationName) => Promise<Organization | undefined>;
 }
 
-export default IReservationSystemRepository;
+export default IORganizationRepository;
