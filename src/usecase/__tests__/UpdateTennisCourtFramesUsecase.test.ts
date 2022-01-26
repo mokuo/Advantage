@@ -1,6 +1,5 @@
 import ILineAdapter from "../ILineAdapter";
 import UpdateTennisCourtFramesUsecase from "../UpdateTennisCourtFramesUsecase";
-import FacilityId from "@src/domain/models/Organizations/FacilityId";
 import IReservationSystemRepository from "@src/domain/models/TennisCourtFrames/IReservationSystemRepository";
 import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFrame";
 import TennisCourtFrameId from "@src/domain/models/TennisCourtFrames/TennisCourtFrameId";
@@ -8,6 +7,8 @@ import TennisCourtFrameStatus from "@src/domain/models/TennisCourtFrames/TennisC
 import TennisCourtName from "@src/domain/models/TennisCourtFrames/TennisCourtName";
 import UsageTime from "@src/domain/models/TennisCourtFrames/UsageTime";
 import FirestoreDatabase from "@src/infrastructure/FirestoreDatabase";
+// 実際に LINE に通知したい場合に使用する
+// import LineAdapter from "@src/infrastructure/LineAdapter";
 import { ORGANIZATIONS } from "@src/infrastructure/Organizations/OrganizationRepository";
 import ReservationSystemRepository from "@src/infrastructure/TennisCourtFrames/ReservationSystemRepository";
 import TennisCourtFrameRepository from "@src/infrastructure/TennisCourtFrames/TennisCourtFrameRepository";
