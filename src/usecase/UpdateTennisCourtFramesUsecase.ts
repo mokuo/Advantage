@@ -1,3 +1,4 @@
+import ILineAdapter from "./ILineAdapter";
 import MessageBuilder from "./MessageBuilder";
 import IReservationSystemRepository from "@src/domain/models/TennisCourtFrames/IReservationSystemRepository";
 import TennisCourtFramesDiffService from "@src/domain/services/TennisCourtFrames/TennisCourtFramesDiffService";
@@ -10,11 +11,11 @@ import TennisCourtFrameRepository from "@src/infrastructure/TennisCourtFrames/Te
 class UpdateTennisCourtFramesUsecase {
   private reservationSystemRepo: IReservationSystemRepository;
 
-  private lineAdapter: LineAdapter;
+  private lineAdapter: ILineAdapter;
 
   constructor(
     reservationSystemRepo: IReservationSystemRepository = new ReservationSystemRepository(),
-    lineAdapter: LineAdapter = new LineAdapter()
+    lineAdapter: ILineAdapter = new LineAdapter()
   ) {
     this.reservationSystemRepo = reservationSystemRepo;
     this.lineAdapter = lineAdapter;
@@ -33,7 +34,7 @@ class UpdateTennisCourtFramesUsecase {
       await Promise.all(changed.map((frame) => repo.save(frame)));
       await Promise.all(added.map((frame) => repo.save(frame)));
 
-      const orgRepo = new OrganizationRepository(t);
+      const orgRepo = new OrganizationRepository();
       const organizations = await orgRepo.all();
       const message = new MessageBuilder().buildMessage(organizations, changed.concat(added));
       await this.lineAdapter.sendMessage(message);
