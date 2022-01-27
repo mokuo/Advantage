@@ -1,12 +1,12 @@
+import IReservationSystemRepository from "src/domain/models/TennisCourtFrames/IReservationSystemRepository";
+import TennisCourtFramesDiffService from "src/domain/services/TennisCourtFrames/TennisCourtFramesDiffService";
+import FirestoreDatabase from "src/infrastructure/FirestoreDatabase";
+import LineAdapter from "src/infrastructure/LineAdapter";
+import OrganizationRepository from "src/infrastructure/Organizations/OrganizationRepository";
+import ReservationSystemRepository from "src/infrastructure/TennisCourtFrames/ReservationSystemRepository";
+import TennisCourtFrameRepository from "src/infrastructure/TennisCourtFrames/TennisCourtFrameRepository";
 import ILineAdapter from "./ILineAdapter";
 import MessageBuilder from "./MessageBuilder";
-import IReservationSystemRepository from "@src/domain/models/TennisCourtFrames/IReservationSystemRepository";
-import TennisCourtFramesDiffService from "@src/domain/services/TennisCourtFrames/TennisCourtFramesDiffService";
-import FirestoreDatabase from "@src/infrastructure/FirestoreDatabase";
-import LineAdapter from "@src/infrastructure/LineAdapter";
-import OrganizationRepository from "@src/infrastructure/Organizations/OrganizationRepository";
-import ReservationSystemRepository from "@src/infrastructure/TennisCourtFrames/ReservationSystemRepository";
-import TennisCourtFrameRepository from "@src/infrastructure/TennisCourtFrames/TennisCourtFrameRepository";
 
 class UpdateTennisCourtFramesUsecase {
   private reservationSystemRepo: IReservationSystemRepository;

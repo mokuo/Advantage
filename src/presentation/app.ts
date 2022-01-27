@@ -1,7 +1,7 @@
 import express from "express";
 import asyncHandler from "express-async-handler";
-import getEnvValue from "@src/lib/getEnvValue";
-import UpdateTennisCourtFramesUsecase from "@src/usecase/UpdateTennisCourtFramesUsecase";
+import getEnvValue from "src/lib/getEnvValue";
+import UpdateTennisCourtFramesUsecase from "src/usecase/UpdateTennisCourtFramesUsecase";
 
 const app = express();
 const port = getEnvValue("PORT");

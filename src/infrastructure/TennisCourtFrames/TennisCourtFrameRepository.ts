@@ -1,12 +1,12 @@
 import { Timestamp } from "@google-cloud/firestore";
 import FirestoreDatabase from "../FirestoreDatabase";
-import FacilityId from "@src/domain/models/Organizations/FacilityId";
-import ITennisCourtFrameRepository from "@src/domain/models/TennisCourtFrames/ITennisCourtFrameRepository";
-import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFrame";
-import TennisCourtFrameId from "@src/domain/models/TennisCourtFrames/TennisCourtFrameId";
-import TennisCourtFrameStatus from "@src/domain/models/TennisCourtFrames/TennisCourtFrameStatus";
-import TennisCourtName from "@src/domain/models/TennisCourtFrames/TennisCourtName";
-import UsageTime from "@src/domain/models/TennisCourtFrames/UsageTime";
+import FacilityId from "src/domain/models/Organizations/FacilityId";
+import ITennisCourtFrameRepository from "src/domain/models/TennisCourtFrames/ITennisCourtFrameRepository";
+import TennisCourtFrame from "src/domain/models/TennisCourtFrames/TennisCourtFrame";
+import TennisCourtFrameId from "src/domain/models/TennisCourtFrames/TennisCourtFrameId";
+import TennisCourtFrameStatus from "src/domain/models/TennisCourtFrames/TennisCourtFrameStatus";
+import TennisCourtName from "src/domain/models/TennisCourtFrames/TennisCourtName";
+import UsageTime from "src/domain/models/TennisCourtFrames/UsageTime";
 
 class UndefinedIdError extends Error {}
 

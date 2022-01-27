@@ -1,5 +1,5 @@
-import Organization from "@src/domain/models/Organizations/Organization";
-import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFrame";
+import Organization from "src/domain/models/Organizations/Organization";
+import TennisCourtFrame from "src/domain/models/TennisCourtFrames/TennisCourtFrame";
 
 class MessageBuilder {
   buildMessage(organizations: Organization[], tennisCourtFrames: TennisCourtFrame[]): string {

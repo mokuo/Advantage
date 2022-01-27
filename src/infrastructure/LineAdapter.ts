@@ -1,6 +1,6 @@
 import { Client } from "@line/bot-sdk";
-import getEnvValue from "@src/lib/getEnvValue";
-import ILineAdapter from "@src/usecase/ILineAdapter";
+import getEnvValue from "src/lib/getEnvValue";
+import ILineAdapter from "src/usecase/ILineAdapter";
 
 class LineAdapter implements ILineAdapter {
   private client: Client;
