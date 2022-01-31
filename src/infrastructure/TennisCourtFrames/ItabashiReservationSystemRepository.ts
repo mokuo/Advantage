@@ -1,8 +1,8 @@
 import BaseReservationSystemRepository from "./BaseReservationSystemRepository";
 import ItabashiTennisCourtTable from "./ItabashiTennisCourtTable";
-import IReservationSystemRepository from "src/domain/models/TennisCourtFrames/IReservationSystemRepository";
-import TennisCourtFrame from "src/domain/models/TennisCourtFrames/TennisCourtFrame";
-import parseHtmlTable from "src/lib/parseHtmlTable";
+import IReservationSystemRepository from "#src/domain/models/TennisCourtFrames/IReservationSystemRepository";
+import TennisCourtFrame from "#src/domain/models/TennisCourtFrames/TennisCourtFrame";
+import parseHtmlTable from "#src/lib/parseHtmlTable";
 
 const URL = "https://www.itabashi-shisetsu-yoyaku.jp/eshisetsu/menu/Login.cgi";
 const TABLE_SELECTOR = "table [summary='選択した施設・時間帯の空き状況を確認するための表。']";

@@ -18,8 +18,13 @@
     "prettier:write": "prettier --write .",
     "lint": "npm run eslint; npm run prettier:check",
     "lint:fix": "npm run eslint:fix; npm run prettier:write",
-    "db:start": "gcloud beta emulators firestore start --host-port=localhost:8080",
-    "dev": "export TZ=Asia/Tokyo; ts-node -r tsconfig-paths/register ./src/presentation/app.ts"
+    "db": "gcloud beta emulators firestore start --host-port=localhost:8080",
+    "dev": "export TZ=Asia/Tokyo; ts-node -r tsconfig-paths/register ./src/presentation/server.ts",
+    "build": "tsc",
+    "start": "export TZ=Asia/Tokyo; node ./dist/presentation/server.js"
+  },
+  "imports": {
+    "#src/*": "./dist/*.js"
   },
   "repository": {
     "type": "git",

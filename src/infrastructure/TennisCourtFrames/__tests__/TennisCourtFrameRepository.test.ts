@@ -1,11 +1,11 @@
 import TennisCourtFrameRepository from "../TennisCourtFrameRepository";
-import FacilityId from "src/domain/models/Organizations/FacilityId";
-import TennisCourtFrame from "src/domain/models/TennisCourtFrames/TennisCourtFrame";
-import TennisCourtFrameId from "src/domain/models/TennisCourtFrames/TennisCourtFrameId";
-import TennisCourtFrameStatus from "src/domain/models/TennisCourtFrames/TennisCourtFrameStatus";
-import TennisCourtName from "src/domain/models/TennisCourtFrames/TennisCourtName";
-import UsageTime from "src/domain/models/TennisCourtFrames/UsageTime";
-import FirestoreDatabase from "src/infrastructure/FirestoreDatabase";
+import FacilityId from "#src/domain/models/Organizations/FacilityId";
+import TennisCourtFrame from "#src/domain/models/TennisCourtFrames/TennisCourtFrame";
+import TennisCourtFrameId from "#src/domain/models/TennisCourtFrames/TennisCourtFrameId";
+import TennisCourtFrameStatus from "#src/domain/models/TennisCourtFrames/TennisCourtFrameStatus";
+import TennisCourtName from "#src/domain/models/TennisCourtFrames/TennisCourtName";
+import UsageTime from "#src/domain/models/TennisCourtFrames/UsageTime";
+import FirestoreDatabase from "#src/infrastructure/FirestoreDatabase";
 
 // fix: `thrown: "Exceeded timeout of 5000 ms for a test.`
 jest.setTimeout(30000);
