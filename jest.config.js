@@ -4,6 +4,6 @@ module.exports = {
   testEnvironment: 'node',
   // ref: https://jestjs.io/ja/docs/configuration#modulenamemapper-objectstring-string--arraystring
   moduleNameMapper: {
-    '@src(.*)': '<rootDir>/src/$1'
+    '#src(.*)': '<rootDir>/src/$1'
   }
 };
