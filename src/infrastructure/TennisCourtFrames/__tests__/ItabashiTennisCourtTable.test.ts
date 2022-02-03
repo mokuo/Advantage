@@ -1,13 +1,13 @@
 import MockDate from "mockdate"; // eslint-disable-line node/no-unpublished-import
 import ItabashiTennisCourtTable from "../ItabashiTennisCourtTable";
-import FacilityName from "@src/domain/models/Organizations/FacilityName";
-import OrganizationName from "@src/domain/models/Organizations/OrganizationName";
-import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFrame";
-import TennisCourtFrameId from "@src/domain/models/TennisCourtFrames/TennisCourtFrameId";
-import TennisCourtFrameStatus from "@src/domain/models/TennisCourtFrames/TennisCourtFrameStatus";
-import TennisCourtName from "@src/domain/models/TennisCourtFrames/TennisCourtName";
-import UsageTime from "@src/domain/models/TennisCourtFrames/UsageTime";
-import OrganizationRepository from "@src/infrastructure/Organizations/OrganizationRepository";
+import FacilityName from "#src/domain/models/Organizations/FacilityName";
+import OrganizationName from "#src/domain/models/Organizations/OrganizationName";
+import TennisCourtFrame from "#src/domain/models/TennisCourtFrames/TennisCourtFrame";
+import TennisCourtFrameId from "#src/domain/models/TennisCourtFrames/TennisCourtFrameId";
+import TennisCourtFrameStatus from "#src/domain/models/TennisCourtFrames/TennisCourtFrameStatus";
+import TennisCourtName from "#src/domain/models/TennisCourtFrames/TennisCourtName";
+import UsageTime from "#src/domain/models/TennisCourtFrames/UsageTime";
+import OrganizationRepository from "#src/infrastructure/Organizations/OrganizationRepository";
 
 describe("ItabashiTennisCourtName", () => {
   describe("#extractTennisCourt", () => {

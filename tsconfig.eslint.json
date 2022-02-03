@@ -1,5 +1,6 @@
 // ref: https://github.com/iamturns/eslint-config-airbnb-typescript#i-get-this-error-when-running-eslint-the-file-must-be-included-in-at-least-one-of-the-projects-provided
 {
   "extends": "./tsconfig.json",
-  "include": ["src/**/*.ts", "__test__/**/*.ts"]
+  "include": ["src/**/*.ts", "__test__/**/*.ts"],
+  "exclude": []
 }

@@ -1,7 +1,7 @@
 import { chromium } from "playwright";
 import ItabashiReservationSystemRepository from "./ItabashiReservationSystemRepository";
-import IReservationSystemRepository from "@src/domain/models/TennisCourtFrames/IReservationSystemRepository";
-import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFrame";
+import IReservationSystemRepository from "#src/domain/models/TennisCourtFrames/IReservationSystemRepository";
+import TennisCourtFrame from "#src/domain/models/TennisCourtFrames/TennisCourtFrame";
 
 class ReservationSystemRepository implements IReservationSystemRepository {
   async all(): Promise<TennisCourtFrame[]> {

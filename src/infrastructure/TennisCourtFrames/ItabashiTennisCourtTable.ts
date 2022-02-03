@@ -1,12 +1,12 @@
 import OrganizationRepository from "../Organizations/OrganizationRepository";
-import Facility from "@src/domain/models/Organizations/Facility";
-import FacilityName from "@src/domain/models/Organizations/FacilityName";
-import OrganizationName from "@src/domain/models/Organizations/OrganizationName";
-import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFrame";
-import TennisCourtFrameId from "@src/domain/models/TennisCourtFrames/TennisCourtFrameId";
-import TennisCourtFrameStatus from "@src/domain/models/TennisCourtFrames/TennisCourtFrameStatus";
-import TennisCourtName from "@src/domain/models/TennisCourtFrames/TennisCourtName";
-import UsageTime from "@src/domain/models/TennisCourtFrames/UsageTime";
+import Facility from "#src/domain/models/Organizations/Facility";
+import FacilityName from "#src/domain/models/Organizations/FacilityName";
+import OrganizationName from "#src/domain/models/Organizations/OrganizationName";
+import TennisCourtFrame from "#src/domain/models/TennisCourtFrames/TennisCourtFrame";
+import TennisCourtFrameId from "#src/domain/models/TennisCourtFrames/TennisCourtFrameId";
+import TennisCourtFrameStatus from "#src/domain/models/TennisCourtFrames/TennisCourtFrameStatus";
+import TennisCourtName from "#src/domain/models/TennisCourtFrames/TennisCourtName";
+import UsageTime from "#src/domain/models/TennisCourtFrames/UsageTime";
 
 class UnexpectedValueError extends Error {}
 class FacilityNotFoundError extends Error {}

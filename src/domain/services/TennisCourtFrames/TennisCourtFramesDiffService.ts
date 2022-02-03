@@ -1,4 +1,4 @@
-import TennisCourtFrame from "@src/domain/models/TennisCourtFrames/TennisCourtFrame";
+import TennisCourtFrame from "#src/domain/models/TennisCourtFrames/TennisCourtFrame";
 
 type DiffResult = {
   deleted: TennisCourtFrame[];
