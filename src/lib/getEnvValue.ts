@@ -2,13 +2,18 @@ import "dotenv/config";
 
 class UndefinedEnvironmentVariableError extends Error {}
 
-const getEnvValue = (envName: string): string => {
+const getEnvValue = (envName: string, defaultValue?: string): string => {
   const value = process.env[envName];
-  if (value === undefined) {
-    throw new UndefinedEnvironmentVariableError(`${envName} is undefined.`);
+
+  if (value) {
+    return value;
   }
 
-  return value;
+  if (defaultValue) {
+    return defaultValue;
+  }
+
+  throw new UndefinedEnvironmentVariableError(`${envName} is undefined.`);
 };
 
 export default getEnvValue;

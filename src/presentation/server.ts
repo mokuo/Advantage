@@ -4,7 +4,7 @@ import getEnvValue from "#src/lib/getEnvValue";
 import UpdateTennisCourtFramesUsecase from "#src/usecase/UpdateTennisCourtFramesUsecase";
 
 const app = express();
-const port = getEnvValue("PORT");
+const port = getEnvValue("PORT", "3000");
 
 app.get("/", (_, res) => {
   res.status(200).send("Hello, Advantage!!");
