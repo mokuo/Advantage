@@ -5,6 +5,7 @@
     - [Requirement](#requirement)
     - [Installation](#installation)
   - [Scripts](#scripts)
+  - [Terraform](#terraform)
 
 ## PlantUML
 
@@ -39,4 +40,14 @@ npm t --watch
 
 # lint
 npm run lint
+```
+
+## Terraform
+
+```bash
+cd infra
+
+terraform init
+terraform plan
+terraform apply
 ```
