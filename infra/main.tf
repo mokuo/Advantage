@@ -5,6 +5,10 @@ terraform {
       version = "4.10.0" # https://registry.terraform.io/providers/hashicorp/google/latest
     }
   }
+
+  backend "gcs" {
+    bucket  = "mokuo-advantage-tf-state"
+  }
 }
 
 provider "google" {
