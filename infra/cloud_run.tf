@@ -1,5 +1,5 @@
-resource "google_cloud_run_service" "mokuo-advantage" {
-  name     = "mokuo-advantage"
+resource "google_cloud_run_service" "advantage" {
+  name     = "advantage"
   location = "asia-northeast1"
 
   template {
@@ -7,6 +7,7 @@ resource "google_cloud_run_service" "mokuo-advantage" {
       containers {
         image = "us-docker.pkg.dev/cloudrun/container/hello"
       }
+      service_account_name = "advantage-cloud-run@mokuo-advantage.iam.gserviceaccount.com"
     }
 
     metadata {
