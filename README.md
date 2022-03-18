@@ -1,31 +1,9 @@
 # Advantage
 
 - [Advantage](#advantage)
-  - [PlantUML](#plantuml)
-    - [Requirement](#requirement)
-    - [Installation](#installation)
   - [Scripts](#scripts)
   - [Terraform](#terraform)
-
-## PlantUML
-
-### Requirement
-
-- Java
-- Graphviz
-- [PlantUML \- Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml)
-
-### Installation
-
-```zsh
-# check
-brew list graphviz
-
-# install
-brew install graphviz
-# or upgrade
-brew upgrade graphviz
-```
+  - [Deploy](#deploy)
 
 ## Scripts
 
@@ -44,10 +22,16 @@ npm run lint
 
 ## Terraform
 
-```bash
+```zsh
 cd infra
 
 terraform init
 terraform plan
 terraform apply
+```
+
+## Deploy
+
+```zsh
+gcloud builds submit --substitutions COMMIT_SHA=`git rev-parse HEAD`
 ```
