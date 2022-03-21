@@ -1,6 +1,9 @@
 resource "google_cloud_run_service" "advantage" {
   name     = "advantage"
   location = "asia-northeast1"
+  # ref: https://zenn.dev/sasamuku/scraps/e722cb05e99c60
+  # `google_cloud_run_service.advantage: Still modifying..` で terraform apply が終わらない問題の対策
+  autogenerate_revision_name = true
 
   template {
     spec {
