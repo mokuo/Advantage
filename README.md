@@ -12,12 +12,14 @@
 npx ts-node
 
 # test
-npm t
-# or
-npm t --watch
+npm run db
+npm test (--watch)
 
 # lint
 npm run lint
+
+# Download chromium
+npx playwright install chromium
 ```
 
 ## Terraform
