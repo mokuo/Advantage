@@ -2,3 +2,5 @@ node_modules/
 tmp/
 .env
 dist/
+.terraform/
+terraform.tfvars

@@ -21,7 +21,7 @@ type FirestoreOperation =
 type Callback = (db: FirestoreDatabase) => Promise<void>;
 
 const initializeFirestore = (): Firestore => {
-  if (getEnvValue("NODE_ENV") === "test") {
+  if (process.env.NODE_ENV === "test") {
     // ref: https://github.com/googleapis/nodejs-firestore/issues/674
     // ref: https://github.com/firebase/firebase-admin-node/issues/472
     return new Firestore({
