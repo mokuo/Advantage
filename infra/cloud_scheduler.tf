@@ -12,5 +12,9 @@ resource "google_cloud_scheduler_job" "job" {
   http_target {
     http_method = "POST"
     uri         = "${google_cloud_run_service.advantage.status[0].url}/tennis-court-frames"
+
+    oidc_token {
+      service_account_email = google_service_account.advantage_cloud_scheduler.email
+    }
   }
 }
