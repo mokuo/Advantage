@@ -20,7 +20,7 @@
     "test": "export TZ=Asia/Tokyo; jest",
     "test:watch": "export TZ=Asia/Tokyo; jest --watch",
     "dev": "export TZ=Asia/Tokyo; ts-node -r tsconfig-paths/register ./src/presentation/server.ts",
-    "build": "tsc",
+    "build": "tsc -p ./tsconfig.production.json",
     "start": "export TZ=Asia/Tokyo; node ./dist/presentation/server.js",
     "docker:build": "docker build . -t mokuo/advantage",
     "docker:run": "docker run -p 3000:3000 mokuo/advantage"

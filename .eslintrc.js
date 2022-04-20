@@ -3,7 +3,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     tsconfigRootDir: __dirname,
-    project: ['./tsconfig.eslint.json'],
+    project: ['./tsconfig.json'],
     ecmaVersion: 2020,
   },
   // fix: `Unable to resolve path to module '@src/**' eslint(import/no-unresolved)`
