@@ -13,22 +13,34 @@ class FacilityNotFoundError extends Error {}
 
 const ORGANIZATION_NAME = "板橋区";
 const FACILITY_NAME = "東板橋庭球場";
+const TENNIS_COURT_ROW_SIZE = 8;
 
 class ItabashiTennisCourtTable {
-  private table: string[][];
+  async extractTennisCourtFrames(table: string[][]): Promise<TennisCourtFrame[]> {
+    const tennisCourtFrames: TennisCourtFrame[] = [];
 
-  constructor(table: string[][]) {
-    this.table = table;
+    // テニスコートの数だけテーブルを取り出す
+    const tanbleCount = (table.length + 1) / (TENNIS_COURT_ROW_SIZE + 1); // 行数を 1 増やして空行含めた行数で割って、テーブル数を算出する
+    for (let i = 0; i < tanbleCount; i += 1) {
+      const tennisCourtTable = table.splice(0, TENNIS_COURT_ROW_SIZE);
+      // eslint-disable-next-line no-await-in-loop
+      const frames = await this.extractFromTennisCourtTable(tennisCourtTable);
+      tennisCourtFrames.push(...frames);
+
+      table.splice(0, 1); // 空行を削除
+    }
+
+    return tennisCourtFrames;
   }
 
-  async extractTennisCourts(): Promise<TennisCourtFrame[]> {
-    const days: string[] = this.table[1].slice(2);
+  private async extractFromTennisCourtTable(tennisCourtTable: string[][]): Promise<TennisCourtFrame[]> {
+    const days: string[] = tennisCourtTable[1].slice(2);
     const tennisCourtFrames: TennisCourtFrame[] = [];
     const facility = await this.getFacility();
 
     // HACK: 予約枠の行を取り出して、forEach とかで回す
-    for (let i = 3; i < this.table.length - 1; i += 1) {
-      const row = this.table[i];
+    for (let i = 3; i < tennisCourtTable.length - 1; i += 1) {
+      const row = tennisCourtTable[i];
       const tennisCourtName = new TennisCourtName(row[0]);
       const time = row[1];
       const reservationFrames = row.slice(2);
