@@ -22,7 +22,7 @@ resource "google_cloud_run_service" "advantage" {
           value = var.MESSAGE_TO
         }
       }
-      service_account_name = "advantage-cloud-run@mokuo-advantage.iam.gserviceaccount.com"
+      service_account_name = google_service_account.advantage_cloud_run.email
     }
 
     metadata {

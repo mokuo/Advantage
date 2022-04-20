@@ -20,6 +20,12 @@ npm run lint
 
 # Download chromium
 npx playwright install chromium
+
+# build
+npm run build
+
+# start
+npm run start
 ```
 
 ## Terraform
