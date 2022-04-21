@@ -6,7 +6,6 @@ import parseHtmlTable from "#src/lib/parseHtmlTable";
 
 const URL = "https://www.itabashi-shisetsu-yoyaku.jp/eshisetsu/menu/Login.cgi";
 const TABLE_SELECTOR = "table [summary='選択した施設・時間帯の空き状況を確認するための表。']";
-const TENNIS_COURT_ROW_SIZE = 8;
 
 class ItabashiReservationSystemRepository
   extends BaseReservationSystemRepository
@@ -34,21 +33,7 @@ class ItabashiReservationSystemRepository
     await page.close();
 
     const table = parseHtmlTable(html, TABLE_SELECTOR);
-    const tennisCourtFrames: TennisCourtFrame[] = [];
-
-    // テニスコートの数だけテーブルを取り出す
-    const tanbleCount = (table.length + 1) / (TENNIS_COURT_ROW_SIZE + 1); // 行数を 1 増やして空行含めた行数で割って、テーブル数を算出する
-    for (let i = 0; i < tanbleCount; i += 1) {
-      const tennisCourtTable = table.splice(0, TENNIS_COURT_ROW_SIZE);
-      const itabashiTennisCourtTable = new ItabashiTennisCourtTable(tennisCourtTable);
-      // eslint-disable-next-line no-await-in-loop
-      const frames = await itabashiTennisCourtTable.extractTennisCourts();
-      tennisCourtFrames.push(...frames);
-
-      table.splice(0, 1); // 空行を削除
-    }
-
-    return tennisCourtFrames;
+    return new ItabashiTennisCourtTable().extractTennisCourtFrames(table);
   }
 }
 
