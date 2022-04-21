@@ -9,6 +9,12 @@ resource "google_cloud_run_service" "advantage" {
     spec {
       containers {
         image = "gcr.io/mokuo-advantage/advantage"
+        resources {
+           limits = {
+             "cpu"  = "1000m"
+             memory = "1024Mi"
+            } 
+        }
         env {
           name = "CHANNEL_ACCESS_TOKEN"
           value = var.CHANNEL_ACCESS_TOKEN
