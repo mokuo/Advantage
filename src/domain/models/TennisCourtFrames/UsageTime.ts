@@ -7,6 +7,16 @@ dayjs.extend(isSameOrAfter);
 export class DifferentDatesError extends Error {}
 export class StartTimeIsAfterEndTimeError extends Error {}
 
+const DAY_MAP_JA: { [day: number]: string } = {
+  0: "日",
+  1: "月",
+  2: "火",
+  3: "水",
+  4: "木",
+  5: "金",
+  6: "土",
+};
+
 class UsageTime implements IValueObject {
   private startTime: Dayjs;
 
@@ -38,7 +48,9 @@ class UsageTime implements IValueObject {
   }
 
   toString(): string {
-    return `${this.startTime.format("YYYY-MM-DD HH:mm")}~${this.endTime.format("HH:mm")}`;
+    return `${this.startTime.format("YYYY-MM-DD")}（${DAY_MAP_JA[this.startTime.day()]}）${this.startTime.format(
+      "HH:mm"
+    )}~${this.endTime.format("HH:mm")}`;
   }
 }
 

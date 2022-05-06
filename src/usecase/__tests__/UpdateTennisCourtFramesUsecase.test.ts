@@ -71,7 +71,7 @@ describe("updateTennisCourtFrames()", () => {
     await usecase.update();
 
     const expectedMessage = `# 板橋区 東板橋庭球場
-- テニスコート1 2022-01-26 09:00~11:00
+- テニスコート1 2022-01-26（水）09:00~11:00
 `;
 
     expect(mockLineAdapter.getMessage()).toEqual(expectedMessage);
