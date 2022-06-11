@@ -23,7 +23,7 @@ class MockReservationSystemRepository implements IReservationSystemRepository {
         TennisCourtFrameId.build(),
         ORGANIZATIONS[0].facilities[0].id,
         new TennisCourtName("テニスコート1"),
-        new UsageTime(new Date(2022, 1 - 1, 26, 9), new Date(2022, 1 - 1, 26, 11)),
+        new UsageTime(new Date(2022, 6 - 1, 11, 9), new Date(2022, 6 - 1, 11, 11)),
         new TennisCourtFrameStatus("available")
       ),
     ];
@@ -71,7 +71,7 @@ describe("updateTennisCourtFrames()", () => {
     await usecase.update();
 
     const expectedMessage = `# 板橋区 東板橋庭球場
-- テニスコート1 2022-01-26（水）09:00~11:00
+- テニスコート1 2022-06-11（土）09:00~11:00
 `;
 
     expect(mockLineAdapter.getMessage()).toEqual(expectedMessage);
