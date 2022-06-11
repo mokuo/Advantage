@@ -16,3 +16,9 @@ variable "MESSAGE_TO" {
   type = string
   default = "TO_BE_DEFINED_IN_TFVARS"
 }
+
+variable "HOLIDAYS" {
+  description = "Holidays to be notified"
+  type = string
+  default = "TO_BE_DEFINED_IN_TFVARS"
+}

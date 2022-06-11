@@ -27,6 +27,10 @@ resource "google_cloud_run_service" "advantage" {
           name = "MESSAGE_TO"
           value = var.MESSAGE_TO
         }
+         env {
+          name = "HOLIDAYS"
+          value = var.HOLIDAYS
+        }
       }
       service_account_name = google_service_account.advantage_cloud_run.email
     }
