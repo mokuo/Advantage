@@ -1,3 +1,4 @@
+import TennisCourtFrameFilter from "./TennisCourtFrameFilter";
 import Organization from "#src/domain/models/Organizations/Organization";
 import TennisCourtFrame from "#src/domain/models/TennisCourtFrames/TennisCourtFrame";
 
@@ -15,9 +16,10 @@ class MessageBuilder {
           text += "\n";
         }
 
-        const filteredFrames = tennisCourtFrames.filter(
+        let filteredFrames = tennisCourtFrames.filter(
           (frame) => frame.status.toString() === "available" && frame.facilityId.isEqual(facility.id)
         );
+        filteredFrames = new TennisCourtFrameFilter().filter(filteredFrames);
         if (filteredFrames.length === 0) {
           return;
         }

@@ -52,6 +52,10 @@ class UsageTime implements IValueObject {
       "HH:mm"
     )}~${this.endTime.format("HH:mm")}`;
   }
+
+  isSaturdayOrSunday(): boolean {
+    return this.startTime.day() === 0 || this.startTime.day() === 6;
+  }
 }
 
 export default UsageTime;

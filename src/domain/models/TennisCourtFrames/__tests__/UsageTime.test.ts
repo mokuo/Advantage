@@ -34,4 +34,19 @@ describe("UsageTime", () => {
       expect(usageTime.toString()).toEqual(expectedText);
     });
   });
+
+  describe("#isSaturdayOrSunday", () => {
+    it.each([
+      [5, true], // 2022/06/05(日)
+      [6, false], // 2022/06/06(月)
+      [7, false], // 2022/06/07(火)
+      [8, false], // 2022/06/08(水)
+      [9, false], // 2022/06/09(木)
+      [10, false], // 2022/06/10(金)
+      [11, true], // 2022/06/11(土)
+    ])("hoge", (day, expected) => {
+      const usageTime = new UsageTime(new Date(2022, 6 - 1, day, 9), new Date(2022, 6 - 1, day, 11));
+      expect(usageTime.isSaturdayOrSunday()).toBe(expected);
+    });
+  });
 });
