@@ -13,7 +13,7 @@ class FacilityNotFoundError extends Error {}
 
 const ORGANIZATION_NAME = "板橋区";
 const FACILITY_NAME = "東板橋庭球場";
-const TENNIS_COURT_ROW_SIZE = 8;
+const TENNIS_COURT_ROW_SIZE = 9;
 
 class ItabashiTennisCourtTable {
   async extractTennisCourtFrames(table: string[][]): Promise<TennisCourtFrame[]> {
