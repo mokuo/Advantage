@@ -13,16 +13,17 @@ class FacilityNotFoundError extends Error {}
 
 const ORGANIZATION_NAME = "板橋区";
 const FACILITY_NAME = "東板橋庭球場";
-const TENNIS_COURT_ROW_SIZE = 9;
+const TENNIS_COURT_COUNT = 2; // 3面, 4面
 
 class ItabashiTennisCourtTable {
   async extractTennisCourtFrames(table: string[][]): Promise<TennisCourtFrame[]> {
     const tennisCourtFrames: TennisCourtFrame[] = [];
 
     // テニスコートの数だけテーブルを取り出す
-    const tanbleCount = (table.length + 1) / (TENNIS_COURT_ROW_SIZE + 1); // 行数を 1 増やして空行含めた行数で割って、テーブル数を算出する
-    for (let i = 0; i < tanbleCount; i += 1) {
-      const tennisCourtTable = table.splice(0, TENNIS_COURT_ROW_SIZE);
+    const tennisCourtRowSize = (table.length - 1) / TENNIS_COURT_COUNT;
+
+    for (let i = 0; i < TENNIS_COURT_COUNT; i += 1) {
+      const tennisCourtTable = table.splice(0, tennisCourtRowSize);
       // eslint-disable-next-line no-await-in-loop
       const frames = await this.extractFromTennisCourtTable(tennisCourtTable);
       tennisCourtFrames.push(...frames);
