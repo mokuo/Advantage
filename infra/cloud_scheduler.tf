@@ -1,7 +1,7 @@
 resource "google_cloud_scheduler_job" "job" {
   name             = "update-tennis-courts-job"
   description      = "Send post request to update tennis courts."
-  schedule         = "*/5 8-22 * * *"
+  schedule         = "*/10 8-22 * * *"
   time_zone        = "Asia/Tokyo"
   attempt_deadline = "320s"
 
