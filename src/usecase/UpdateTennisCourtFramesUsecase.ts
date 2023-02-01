@@ -37,7 +37,10 @@ class UpdateTennisCourtFramesUsecase {
       const orgRepo = new OrganizationRepository();
       const organizations = await orgRepo.all();
       const message = new MessageBuilder().buildMessage(organizations, changed.concat(added));
-      await this.lineAdapter.sendMessage(message);
+      if (message !== "") {
+        // NOTE: メッセージが空文字だと 400 エラーになる
+        await this.lineAdapter.sendMessage(message);
+      }
     });
   }
 }
